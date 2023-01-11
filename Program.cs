@@ -11,7 +11,7 @@ namespace Proyecto_Sistema_Inventario
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
-            Application.Run(new Main_windows());
+            Application.Run(new Login_user());
         }
     }
 }

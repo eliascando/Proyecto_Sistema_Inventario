@@ -33,7 +33,7 @@
             this.lblApellidos = new System.Windows.Forms.Label();
             this.lblId = new System.Windows.Forms.Label();
             this.groupBoxDatosPersonales = new System.Windows.Forms.GroupBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txtTelefono = new System.Windows.Forms.TextBox();
             this.lblTelefono = new System.Windows.Forms.Label();
             this.txtId = new System.Windows.Forms.TextBox();
             this.txtApellido = new System.Windows.Forms.TextBox();
@@ -89,7 +89,7 @@
             // 
             // groupBoxDatosPersonales
             // 
-            this.groupBoxDatosPersonales.Controls.Add(this.textBox1);
+            this.groupBoxDatosPersonales.Controls.Add(this.txtTelefono);
             this.groupBoxDatosPersonales.Controls.Add(this.lblTelefono);
             this.groupBoxDatosPersonales.Controls.Add(this.txtId);
             this.groupBoxDatosPersonales.Controls.Add(this.txtApellido);
@@ -105,12 +105,12 @@
             this.groupBoxDatosPersonales.Text = "Datos Personales";
             this.groupBoxDatosPersonales.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
-            // textBox1
+            // txtTelefono
             // 
-            this.textBox1.Location = new System.Drawing.Point(87, 116);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(175, 23);
-            this.textBox1.TabIndex = 8;
+            this.txtTelefono.Location = new System.Drawing.Point(87, 116);
+            this.txtTelefono.Name = "txtTelefono";
+            this.txtTelefono.Size = new System.Drawing.Size(175, 23);
+            this.txtTelefono.TabIndex = 8;
             // 
             // lblTelefono
             // 
@@ -134,6 +134,7 @@
             this.txtApellido.Name = "txtApellido";
             this.txtApellido.Size = new System.Drawing.Size(175, 23);
             this.txtApellido.TabIndex = 5;
+            this.txtApellido.TextChanged += new System.EventHandler(this.txtApellido_TextChanged);
             // 
             // txtNombre
             // 
@@ -171,6 +172,7 @@
             // 
             this.txtPass.Location = new System.Drawing.Point(87, 53);
             this.txtPass.Name = "txtPass";
+            this.txtPass.PasswordChar = '*';
             this.txtPass.Size = new System.Drawing.Size(175, 23);
             this.txtPass.TabIndex = 3;
             this.txtPass.TextChanged += new System.EventHandler(this.txtPass_TextChanged);
@@ -208,6 +210,7 @@
             this.btnRegistrar.TabIndex = 6;
             this.btnRegistrar.Text = "Registrar";
             this.btnRegistrar.UseVisualStyleBackColor = true;
+            this.btnRegistrar.Click += new System.EventHandler(this.btnRegistrar_Click);
             // 
             // Create_user
             // 
@@ -219,6 +222,7 @@
             this.Controls.Add(this.groupBoxDatosPersonales);
             this.Controls.Add(this.lbHeader);
             this.Name = "Create_user";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Create_user";
             this.groupBoxDatosPersonales.ResumeLayout(false);
             this.groupBoxDatosPersonales.PerformLayout();
@@ -242,7 +246,7 @@
         private GroupBox groupBoxDatosLogin;
         private Label lblPass;
         private Label lblUser;
-        private TextBox textBox1;
+        private TextBox txtTelefono;
         private Label lblTelefono;
         private CheckBox mostrarPass;
         private TextBox txtPass;
