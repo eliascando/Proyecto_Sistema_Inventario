@@ -22,9 +22,10 @@ namespace Proyecto_Sistema_Inventario
         private void btnIniciarSesion_Click(object sender, EventArgs e)
         {
 
-            Usuario user = new Usuario("", "", "", "", "", "");
+            Usuario user = new Usuario();
             string username = txtUser.Text;
             string password = txtPass.Text;
+            var userAdmin = UsuarioAdmin.GetInstance();
 
             if (string.IsNullOrEmpty(txtUser.Text))
             {
@@ -38,15 +39,25 @@ namespace Proyecto_Sistema_Inventario
                 return;
             }
 
-            if (user.IsValidUser(username, password))
+            if(username == userAdmin.User && password == userAdmin.Pass)
             {
-                MessageBox.Show("Acceso Exitoso!");
-                Main_windows main = new Main_windows();
-                main.Show();
+                MessageBox.Show("Acceso Exitoso! Bienvenido Administrador...");
+                Main_windows windowsadmin = new Main_windows();
+                windowsadmin.Show();
+                this.Close();
             }
-            else
+            else 
             {
-                MessageBox.Show("Usuario o contraseña incorrecta...");
+                if (user.IsValidUser(username, password))
+                {
+                    Main_windows_user main = new Main_windows_user();
+                    main.Show();
+                    this.Close();
+                }
+                else
+                {
+                    MessageBox.Show("Usuario o contraseña incorrecta...");
+                }
             }
         }
 

@@ -60,49 +60,98 @@ namespace Proyecto_Sistema_Inventario
 
         private void btnRegistrar_Click(object sender, EventArgs e)
         {
-            Usuario user = new Usuario("","","","","","");
+            Usuario user = new Usuario();
             user.Nombre = txtNombre.Text;
             user.Apellido= txtApellido.Text;
             user.Id= txtId.Text;
             user.Telefono= txtTelefono.Text;
             user.User= txtUser.Text;
             user.Pass= txtPass.Text;
+            user.Estado = "activo";
 
 
 
             List<Usuario> usuarios = new List<Usuario>();
 
-            bool existe = usuarios.Any(x => x.User == user.User);
+            string[] lines = File.ReadAllLines("usuarios.csv");
+            bool existe = false;
+            foreach (string line in lines)
+            {
+                string[] values = line.Split(',');
+                if (values[2] == txtId.Text)
+                {
+                    existe = true;
+                    break;
+                }
+            }
+
             if (!existe)
             {
-                usuarios.Add(user);
+                // Agrega el usuario al archivo
+                using (StreamWriter sw = new StreamWriter("usuarios.csv", true))
+                {
+                    string row = string.Format("{0},{1},{2},{3},{4},{5},{6}", user.Nombre, user.Apellido, user.Id, user.Telefono, user.User, user.Pass,user.Estado);
+                    sw.WriteLine(row);
+                }
+                MessageBox.Show("Usuario Registrado Exitosamente!");
+
+                foreach (Control c in this.Controls)
+                {
+                    if (c is TextBox)
+                    {
+                        c.Text = "";
+                    }
+                }
             }
             else
             {
                 MessageBox.Show("ERROR! Usuario ya registrado!");
             }
 
+            //bool existe = usuarios.Any(x => x.User == user.User);
+            //if (!existe)
+            //{
+            //    usuarios.Add(user);
+            //    using (StreamWriter sw = new StreamWriter("usuarios.csv", true))
+            //    {
+            //        foreach (Usuario usua in usuarios)
+            //        {
+            //            // Crea una línea de texto con los valores de cada propiedad del usuario
+            //            string row = string.Format("{0},{1},{2},{3},{4},{5}", usua.Nombre, usua.Apellido, usua.Id, usua.Telefono, usua.User, usua.Pass);
 
-            using (StreamWriter sw = new StreamWriter("usuarios.csv", true))
+            //            // Escribe la línea en el archivo
+            //            sw.WriteLine(row);
+            //        }
+            //    }
+            //    MessageBox.Show("Usuario Registrado Exitosamente!");
+
+            //    foreach (Control c in this.Controls)
+            //    {
+            //        if (c is TextBox)
+            //        {
+            //            c.Text = "";
+            //        }
+            //    }
+            //}
+            //else
+            //{
+            //    MessageBox.Show("ERROR! Usuario ya registrado!");
+            //}
+
+
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            string filePath = "usuarios.csv";
+            using (var sw = new StreamWriter(filePath))
             {
-                foreach (Usuario usua in usuarios)
-                {
-                    // Crea una línea de texto con los valores de cada propiedad del usuario
-                    string row = string.Format("{0},{1},{2},{3},{4},{5}", usua.Nombre, usua.Apellido, usua.Id, usua.Telefono, usua.User, usua.Pass);
-
-                    // Escribe la línea en el archivo
-                    sw.WriteLine(row);
-                }
+                sw.Write("");
             }
-            MessageBox.Show("Usuario Registrado Exitosamente!");
-
-            foreach (Control c in this.Controls)
-            {
-                if (c is TextBox)
-                {
-                    c.Text = "";
-                }
-            }
+            var users = new List<Usuario>();
+            //gridUsers.DataSource = users;
+            //gridUsers.AutoGenerateColumns = true;
         }
     }
 }

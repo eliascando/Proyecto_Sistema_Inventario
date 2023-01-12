@@ -33,15 +33,17 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.lblPVP = new System.Windows.Forms.Label();
             this.lblCosto = new System.Windows.Forms.Label();
-            this.lblMarca = new System.Windows.Forms.Label();
             this.lblCodigo = new System.Windows.Forms.Label();
             this.txtCodigo = new System.Windows.Forms.TextBox();
             this.txtCosto = new System.Windows.Forms.TextBox();
             this.txtPVP = new System.Windows.Forms.TextBox();
-            this.txtMarca = new System.Windows.Forms.TextBox();
             this.txtNombre = new System.Windows.Forms.TextBox();
             this.lblNombre = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.txtStock = new System.Windows.Forms.TextBox();
+            this.lblStock = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -65,14 +67,16 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.label3);
+            this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.lblPVP);
             this.groupBox1.Controls.Add(this.lblCosto);
-            this.groupBox1.Controls.Add(this.lblMarca);
+            this.groupBox1.Controls.Add(this.lblStock);
             this.groupBox1.Controls.Add(this.lblCodigo);
             this.groupBox1.Controls.Add(this.txtCodigo);
             this.groupBox1.Controls.Add(this.txtCosto);
             this.groupBox1.Controls.Add(this.txtPVP);
-            this.groupBox1.Controls.Add(this.txtMarca);
+            this.groupBox1.Controls.Add(this.txtStock);
             this.groupBox1.Controls.Add(this.txtNombre);
             this.groupBox1.Controls.Add(this.lblNombre);
             this.groupBox1.Location = new System.Drawing.Point(44, 107);
@@ -99,15 +103,6 @@
             this.lblCosto.Size = new System.Drawing.Size(74, 15);
             this.lblCosto.TabIndex = 0;
             this.lblCosto.Text = "Precio Costo";
-            // 
-            // lblMarca
-            // 
-            this.lblMarca.AutoSize = true;
-            this.lblMarca.Location = new System.Drawing.Point(21, 142);
-            this.lblMarca.Name = "lblMarca";
-            this.lblMarca.Size = new System.Drawing.Size(40, 15);
-            this.lblMarca.TabIndex = 0;
-            this.lblMarca.Text = "Marca";
             // 
             // lblCodigo
             // 
@@ -139,13 +134,6 @@
             this.txtPVP.Size = new System.Drawing.Size(191, 23);
             this.txtPVP.TabIndex = 1;
             // 
-            // txtMarca
-            // 
-            this.txtMarca.Location = new System.Drawing.Point(218, 134);
-            this.txtMarca.Name = "txtMarca";
-            this.txtMarca.Size = new System.Drawing.Size(191, 23);
-            this.txtMarca.TabIndex = 1;
-            // 
             // txtNombre
             // 
             this.txtNombre.Location = new System.Drawing.Point(218, 34);
@@ -172,6 +160,40 @@
             this.label1.TabIndex = 4;
             this.label1.Text = "Registro de Producto";
             // 
+            // txtStock
+            // 
+            this.txtStock.Location = new System.Drawing.Point(218, 134);
+            this.txtStock.Name = "txtStock";
+            this.txtStock.Size = new System.Drawing.Size(191, 23);
+            this.txtStock.TabIndex = 1;
+            // 
+            // lblStock
+            // 
+            this.lblStock.AutoSize = true;
+            this.lblStock.Location = new System.Drawing.Point(21, 142);
+            this.lblStock.Name = "lblStock";
+            this.lblStock.Size = new System.Drawing.Size(36, 15);
+            this.lblStock.TabIndex = 0;
+            this.lblStock.Text = "Stock";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(199, 183);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(13, 15);
+            this.label2.TabIndex = 2;
+            this.label2.Text = "$";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(199, 235);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(13, 15);
+            this.label3.TabIndex = 3;
+            this.label3.Text = "$";
+            // 
             // Register_product
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -197,14 +219,16 @@
         private GroupBox groupBox1;
         private Label lblPVP;
         private Label lblCosto;
-        private Label lblMarca;
         private Label lblCodigo;
         private TextBox txtCodigo;
         private TextBox txtCosto;
         private TextBox txtPVP;
-        private TextBox txtMarca;
         private TextBox txtNombre;
         private Label lblNombre;
         private Label label1;
+        private Label label3;
+        private Label label2;
+        private Label lblStock;
+        private TextBox txtStock;
     }
 }

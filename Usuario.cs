@@ -9,15 +9,19 @@ namespace Proyecto_Sistema_Inventario
 {
     public class Usuario
     {
-        private String nombre = "";
-        private String apellido = "";
-        private String id = "";
-        private String telefono = "";
-        private String user = "";
-        private String pass = "";
+        private String nombre;
+        private String apellido;
+        private String id;
+        private String telefono;
+        private String user;
+        private String pass;
+        private String estado;
 
-      
-        public Usuario(string nombre, string apellido, string id, string telefono, string user, string pass)
+        public Usuario()
+        {
+
+        }
+        public Usuario(string nombre, string apellido, string id, string telefono, string user, string pass, string estado)
         {
             Nombre = nombre;
             Apellido = apellido;
@@ -25,6 +29,7 @@ namespace Proyecto_Sistema_Inventario
             Telefono = telefono;
             User = user;
             Pass = pass;
+            Estado = estado;
         }
 
         public string Nombre { get => nombre; set => nombre = value; }
@@ -33,6 +38,7 @@ namespace Proyecto_Sistema_Inventario
         public string Telefono { get => telefono; set => telefono = value; }
         public string User { get => user; set => user = value; }
         public string Pass { get => pass; set => pass = value; }
+        public string Estado { get => estado; set => estado = value; }
 
         public bool IsValidUser(string username, string password)
         {
@@ -46,6 +52,7 @@ namespace Proyecto_Sistema_Inventario
                     var values = line.Split(',');
                     if (values[4] == username && values[5] == password)
                     {
+                        MessageBox.Show("Acceso Exitoso! Bienvenido " + values[0]); 
                         return true;
                     }
                 }

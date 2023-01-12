@@ -30,10 +30,11 @@
         {
             this.lblBuscar = new System.Windows.Forms.Label();
             this.txtFiltro = new System.Windows.Forms.TextBox();
-            this.cmbTipo = new System.Windows.Forms.ComboBox();
+            this.cboFilter = new System.Windows.Forms.ComboBox();
             this.gridUsers = new System.Windows.Forms.DataGridView();
             this.btnActualizar = new System.Windows.Forms.Button();
             this.btn_Inactivar = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.gridUsers)).BeginInit();
             this.SuspendLayout();
             // 
@@ -54,18 +55,19 @@
             this.txtFiltro.TabIndex = 1;
             this.txtFiltro.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
-            // cmbTipo
+            // cboFilter
             // 
-            this.cmbTipo.FormattingEnabled = true;
-            this.cmbTipo.Items.AddRange(new object[] {
+            this.cboFilter.FormattingEnabled = true;
+            this.cboFilter.Items.AddRange(new object[] {
             "Id",
             "Usuario",
             "Apellido",
             "Nombre"});
-            this.cmbTipo.Location = new System.Drawing.Point(372, 41);
-            this.cmbTipo.Name = "cmbTipo";
-            this.cmbTipo.Size = new System.Drawing.Size(121, 23);
-            this.cmbTipo.TabIndex = 2;
+            this.cboFilter.Location = new System.Drawing.Point(372, 41);
+            this.cboFilter.Name = "cboFilter";
+            this.cboFilter.Size = new System.Drawing.Size(121, 23);
+            this.cboFilter.TabIndex = 2;
+            this.cboFilter.SelectedIndexChanged += new System.EventHandler(this.cmbTipo_SelectedIndexChanged);
             // 
             // gridUsers
             // 
@@ -79,7 +81,7 @@
             // 
             // btnActualizar
             // 
-            this.btnActualizar.Location = new System.Drawing.Point(169, 339);
+            this.btnActualizar.Location = new System.Drawing.Point(185, 321);
             this.btnActualizar.Name = "btnActualizar";
             this.btnActualizar.Size = new System.Drawing.Size(75, 23);
             this.btnActualizar.TabIndex = 4;
@@ -89,7 +91,7 @@
             // 
             // btn_Inactivar
             // 
-            this.btn_Inactivar.Location = new System.Drawing.Point(345, 339);
+            this.btn_Inactivar.Location = new System.Drawing.Point(383, 321);
             this.btn_Inactivar.Name = "btn_Inactivar";
             this.btn_Inactivar.Size = new System.Drawing.Size(98, 23);
             this.btn_Inactivar.TabIndex = 5;
@@ -97,15 +99,26 @@
             this.btn_Inactivar.UseVisualStyleBackColor = true;
             this.btn_Inactivar.Click += new System.EventHandler(this.btn_Inactivar_Click);
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(293, 321);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 6;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // Admin_user
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(647, 400);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.btn_Inactivar);
             this.Controls.Add(this.btnActualizar);
             this.Controls.Add(this.gridUsers);
-            this.Controls.Add(this.cmbTipo);
+            this.Controls.Add(this.cboFilter);
             this.Controls.Add(this.txtFiltro);
             this.Controls.Add(this.lblBuscar);
             this.Name = "Admin_user";
@@ -122,9 +135,10 @@
 
         private Label lblBuscar;
         private TextBox txtFiltro;
-        private ComboBox cmbTipo;
+        private ComboBox cboFilter;
         private DataGridView gridUsers;
         private Button btnActualizar;
         private Button btn_Inactivar;
+        private Button button1;
     }
 }

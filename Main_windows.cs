@@ -44,5 +44,11 @@ namespace Proyecto_Sistema_Inventario
                 this.Close();
             } 
         }
+
+        private void registrarProductoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Register_product registrar = new Register_product();
+            registrar.Show();
+        }
     }
 }

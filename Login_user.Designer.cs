@@ -88,7 +88,7 @@
             this.txtPass.Location = new System.Drawing.Point(180, 176);
             this.txtPass.Name = "txtPass";
             this.txtPass.Size = new System.Drawing.Size(210, 23);
-            this.txtPass.TabIndex = 7;
+            this.txtPass.TabIndex = 8;
             this.txtPass.TextChanged += new System.EventHandler(this.txtPass_TextChanged);
             // 
             // txtUser
@@ -96,7 +96,7 @@
             this.txtUser.Location = new System.Drawing.Point(180, 105);
             this.txtUser.Name = "txtUser";
             this.txtUser.Size = new System.Drawing.Size(210, 23);
-            this.txtUser.TabIndex = 8;
+            this.txtUser.TabIndex = 7;
             // 
             // label3
             // 

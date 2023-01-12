@@ -1,6 +1,6 @@
 ﻿namespace Proyecto_Sistema_Inventario
 {
-    partial class Main_windows
+    partial class Main_windows_user
     {
         /// <summary>
         /// Required designer variable.
@@ -33,9 +33,6 @@
             this.registrarProductoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ingresarProductoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.consultarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.usuariosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.registrarNuevoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.administrarUsuariosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ayudaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cerrarSesiónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.acercaDeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -46,12 +43,11 @@
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.inventarioToolStripMenuItem,
-            this.usuariosToolStripMenuItem,
             this.ayudaToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(800, 24);
-            this.menuStrip1.TabIndex = 0;
+            this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
             // 
             // inventarioToolStripMenuItem
@@ -67,44 +63,20 @@
             // registrarProductoToolStripMenuItem
             // 
             this.registrarProductoToolStripMenuItem.Name = "registrarProductoToolStripMenuItem";
-            this.registrarProductoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.registrarProductoToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
             this.registrarProductoToolStripMenuItem.Text = "Registrar Producto";
-            this.registrarProductoToolStripMenuItem.Click += new System.EventHandler(this.registrarProductoToolStripMenuItem_Click);
             // 
             // ingresarProductoToolStripMenuItem
             // 
             this.ingresarProductoToolStripMenuItem.Name = "ingresarProductoToolStripMenuItem";
-            this.ingresarProductoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.ingresarProductoToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
             this.ingresarProductoToolStripMenuItem.Text = "Ingresar Producto";
             // 
             // consultarToolStripMenuItem
             // 
             this.consultarToolStripMenuItem.Name = "consultarToolStripMenuItem";
-            this.consultarToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.consultarToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
             this.consultarToolStripMenuItem.Text = "Consultar";
-            // 
-            // usuariosToolStripMenuItem
-            // 
-            this.usuariosToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.registrarNuevoToolStripMenuItem,
-            this.administrarUsuariosToolStripMenuItem});
-            this.usuariosToolStripMenuItem.Name = "usuariosToolStripMenuItem";
-            this.usuariosToolStripMenuItem.Size = new System.Drawing.Size(64, 20);
-            this.usuariosToolStripMenuItem.Text = "Usuarios";
-            // 
-            // registrarNuevoToolStripMenuItem
-            // 
-            this.registrarNuevoToolStripMenuItem.Name = "registrarNuevoToolStripMenuItem";
-            this.registrarNuevoToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
-            this.registrarNuevoToolStripMenuItem.Text = "Registrar Nuevo";
-            this.registrarNuevoToolStripMenuItem.Click += new System.EventHandler(this.registrarNuevoToolStripMenuItem_Click);
-            // 
-            // administrarUsuariosToolStripMenuItem
-            // 
-            this.administrarUsuariosToolStripMenuItem.Name = "administrarUsuariosToolStripMenuItem";
-            this.administrarUsuariosToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
-            this.administrarUsuariosToolStripMenuItem.Text = "Administrar Usuarios";
-            this.administrarUsuariosToolStripMenuItem.Click += new System.EventHandler(this.administrarUsuariosToolStripMenuItem_Click);
             // 
             // ayudaToolStripMenuItem
             // 
@@ -118,27 +90,24 @@
             // cerrarSesiónToolStripMenuItem
             // 
             this.cerrarSesiónToolStripMenuItem.Name = "cerrarSesiónToolStripMenuItem";
-            this.cerrarSesiónToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.cerrarSesiónToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
             this.cerrarSesiónToolStripMenuItem.Text = "Cerrar Sesión";
-            this.cerrarSesiónToolStripMenuItem.Click += new System.EventHandler(this.cerrarSesiónToolStripMenuItem_Click);
             // 
             // acercaDeToolStripMenuItem
             // 
             this.acercaDeToolStripMenuItem.Name = "acercaDeToolStripMenuItem";
-            this.acercaDeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.acercaDeToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
             this.acercaDeToolStripMenuItem.Text = "Acerca de";
             // 
-            // Main_windows
+            // Main_windows_user
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.menuStrip1);
-            this.MainMenuStrip = this.menuStrip1;
-            this.Name = "Main_windows";
+            this.Name = "Main_windows_user";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Main_windows";
-            this.Load += new System.EventHandler(this.Main_windows_Load);
+            this.Text = "Main_windows_user";
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -153,9 +122,6 @@
         private ToolStripMenuItem registrarProductoToolStripMenuItem;
         private ToolStripMenuItem ingresarProductoToolStripMenuItem;
         private ToolStripMenuItem consultarToolStripMenuItem;
-        private ToolStripMenuItem usuariosToolStripMenuItem;
-        private ToolStripMenuItem registrarNuevoToolStripMenuItem;
-        private ToolStripMenuItem administrarUsuariosToolStripMenuItem;
         private ToolStripMenuItem ayudaToolStripMenuItem;
         private ToolStripMenuItem cerrarSesiónToolStripMenuItem;
         private ToolStripMenuItem acercaDeToolStripMenuItem;
