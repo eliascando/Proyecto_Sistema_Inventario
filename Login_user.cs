@@ -44,7 +44,8 @@ namespace Proyecto_Sistema_Inventario
                 MessageBox.Show("Acceso Exitoso! Bienvenido Administrador...");
                 Main_windows windowsadmin = new Main_windows();
                 windowsadmin.Show();
-                this.Close();
+                txtUser.Text = "";
+                txtPass.Text = "";
             }
             else 
             {
@@ -52,7 +53,9 @@ namespace Proyecto_Sistema_Inventario
                 {
                     Main_windows_user main = new Main_windows_user();
                     main.Show();
-                    this.Close();
+                    txtUser.Text = "";
+                    txtPass.Text = "";
+
                 }
                 else
                 {
@@ -83,6 +86,11 @@ namespace Proyecto_Sistema_Inventario
         private void checkVerPass_CheckedChanged(object sender, EventArgs e)
         {
             txtPass.UseSystemPasswordChar = !checkVerPass.Checked;
+        }
+
+        private void Login_user_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

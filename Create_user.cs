@@ -69,7 +69,16 @@ namespace Proyecto_Sistema_Inventario
             user.Pass= txtPass.Text;
             user.Estado = "activo";
 
-
+            if (string.IsNullOrEmpty(txtNombre.Text) ||
+               string.IsNullOrEmpty(txtApellido.Text) ||
+               string.IsNullOrEmpty(txtId.Text) ||
+               string.IsNullOrEmpty(txtTelefono.Text) ||
+               string.IsNullOrEmpty(txtUser.Text) ||
+               string.IsNullOrEmpty(txtPass.Text))
+            {
+                MessageBox.Show("ERROR! Debe llenar todos los campos...");
+                return;
+            }
 
             List<Usuario> usuarios = new List<Usuario>();
 
@@ -95,63 +104,68 @@ namespace Proyecto_Sistema_Inventario
                 }
                 MessageBox.Show("Usuario Registrado Exitosamente!");
 
-                foreach (Control c in this.Controls)
-                {
-                    if (c is TextBox)
-                    {
-                        c.Text = "";
-                    }
-                }
+                txtNombre.Text = "";
+                txtApellido.Text = "";
+                txtId.Text = "";
+                txtTelefono.Text = "";
+                txtUser.Text = "";
+                txtPass.Text = "";
             }
             else
             {
-                MessageBox.Show("ERROR! Usuario ya registrado!");
+                MessageBox.Show("ERROR! Usuario ya registrado...");
+                txtNombre.Text = "";
+                txtApellido.Text = "";
+                txtId.Text = "";
+                txtTelefono.Text = "";
+                txtUser.Text = "";
+                txtPass.Text = "";
             }
-
-            //bool existe = usuarios.Any(x => x.User == user.User);
-            //if (!existe)
-            //{
-            //    usuarios.Add(user);
-            //    using (StreamWriter sw = new StreamWriter("usuarios.csv", true))
-            //    {
-            //        foreach (Usuario usua in usuarios)
-            //        {
-            //            // Crea una línea de texto con los valores de cada propiedad del usuario
-            //            string row = string.Format("{0},{1},{2},{3},{4},{5}", usua.Nombre, usua.Apellido, usua.Id, usua.Telefono, usua.User, usua.Pass);
-
-            //            // Escribe la línea en el archivo
-            //            sw.WriteLine(row);
-            //        }
-            //    }
-            //    MessageBox.Show("Usuario Registrado Exitosamente!");
-
-            //    foreach (Control c in this.Controls)
-            //    {
-            //        if (c is TextBox)
-            //        {
-            //            c.Text = "";
-            //        }
-            //    }
-            //}
-            //else
-            //{
-            //    MessageBox.Show("ERROR! Usuario ya registrado!");
-            //}
-
-
-
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string filePath = "usuarios.csv";
-            using (var sw = new StreamWriter(filePath))
+
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtId_TextChanged(object sender, EventArgs e)
+        {
+           
+        }
+
+        private void txtId_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (txtId.Text.Length >= 10 && !char.IsControl(e.KeyChar))
             {
-                sw.Write("");
+                e.Handled = true;
             }
-            var users = new List<Usuario>();
-            //gridUsers.DataSource = users;
-            //gridUsers.AutoGenerateColumns = true;
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void txtTelefono_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtTelefono_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void Create_user_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

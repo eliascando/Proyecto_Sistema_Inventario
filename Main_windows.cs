@@ -15,6 +15,8 @@ namespace Proyecto_Sistema_Inventario
         public Main_windows()
         {
             InitializeComponent();
+            Login_user login = new Login_user();
+            login.Close();
         }
 
         private void registrarNuevoToolStripMenuItem_Click(object sender, EventArgs e)
@@ -39,15 +41,13 @@ namespace Proyecto_Sistema_Inventario
             DialogResult result = MessageBox.Show("¿Estás seguro de que deseas Cerrar Sesión?", "Confirmación", MessageBoxButtons.YesNo);
             if (result == DialogResult.Yes)
             {
-                Login_user login = new Login_user();
-                login.Show();
                 this.Close();
             } 
         }
 
         private void registrarProductoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Register_product registrar = new Register_product();
+            Register_products registrar = new Register_products();
             registrar.Show();
         }
     }

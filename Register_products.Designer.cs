@@ -1,6 +1,6 @@
 ﻿namespace Proyecto_Sistema_Inventario
 {
-    partial class Register_product
+    partial class Register_products
     {
         /// <summary>
         /// Required designer variable.
@@ -31,37 +31,37 @@
             this.btnLimpiar = new System.Windows.Forms.Button();
             this.btnAgregar = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.lblPVP = new System.Windows.Forms.Label();
             this.lblCosto = new System.Windows.Forms.Label();
+            this.lblStock = new System.Windows.Forms.Label();
             this.lblCodigo = new System.Windows.Forms.Label();
             this.txtCodigo = new System.Windows.Forms.TextBox();
             this.txtCosto = new System.Windows.Forms.TextBox();
             this.txtPVP = new System.Windows.Forms.TextBox();
+            this.txtStock = new System.Windows.Forms.TextBox();
             this.txtNombre = new System.Windows.Forms.TextBox();
             this.lblNombre = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.txtStock = new System.Windows.Forms.TextBox();
-            this.lblStock = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnLimpiar
             // 
-            this.btnLimpiar.Location = new System.Drawing.Point(337, 424);
+            this.btnLimpiar.Location = new System.Drawing.Point(310, 376);
             this.btnLimpiar.Name = "btnLimpiar";
             this.btnLimpiar.Size = new System.Drawing.Size(129, 46);
-            this.btnLimpiar.TabIndex = 6;
+            this.btnLimpiar.TabIndex = 7;
             this.btnLimpiar.Text = "Limpiar";
             this.btnLimpiar.UseVisualStyleBackColor = true;
             // 
             // btnAgregar
             // 
-            this.btnAgregar.Location = new System.Drawing.Point(91, 424);
+            this.btnAgregar.Location = new System.Drawing.Point(113, 376);
             this.btnAgregar.Name = "btnAgregar";
             this.btnAgregar.Size = new System.Drawing.Size(129, 46);
-            this.btnAgregar.TabIndex = 7;
+            this.btnAgregar.TabIndex = 6;
             this.btnAgregar.Text = "Agregar";
             this.btnAgregar.UseVisualStyleBackColor = true;
             // 
@@ -79,12 +79,31 @@
             this.groupBox1.Controls.Add(this.txtStock);
             this.groupBox1.Controls.Add(this.txtNombre);
             this.groupBox1.Controls.Add(this.lblNombre);
-            this.groupBox1.Location = new System.Drawing.Point(44, 107);
+            this.groupBox1.Location = new System.Drawing.Point(30, 80);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(479, 279);
-            this.groupBox1.TabIndex = 5;
+            this.groupBox1.TabIndex = 9;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Datos del producto";
+            this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(199, 235);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(13, 15);
+            this.label3.TabIndex = 3;
+            this.label3.Text = "$";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(199, 183);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(13, 15);
+            this.label2.TabIndex = 2;
+            this.label2.Text = "$";
             // 
             // lblPVP
             // 
@@ -104,6 +123,15 @@
             this.lblCosto.TabIndex = 0;
             this.lblCosto.Text = "Precio Costo";
             // 
+            // lblStock
+            // 
+            this.lblStock.AutoSize = true;
+            this.lblStock.Location = new System.Drawing.Point(21, 142);
+            this.lblStock.Name = "lblStock";
+            this.lblStock.Size = new System.Drawing.Size(36, 15);
+            this.lblStock.TabIndex = 0;
+            this.lblStock.Text = "Stock";
+            // 
             // lblCodigo
             // 
             this.lblCodigo.AutoSize = true;
@@ -118,21 +146,28 @@
             this.txtCodigo.Location = new System.Drawing.Point(218, 83);
             this.txtCodigo.Name = "txtCodigo";
             this.txtCodigo.Size = new System.Drawing.Size(191, 23);
-            this.txtCodigo.TabIndex = 1;
+            this.txtCodigo.TabIndex = 2;
             // 
             // txtCosto
             // 
             this.txtCosto.Location = new System.Drawing.Point(218, 180);
             this.txtCosto.Name = "txtCosto";
             this.txtCosto.Size = new System.Drawing.Size(191, 23);
-            this.txtCosto.TabIndex = 1;
+            this.txtCosto.TabIndex = 4;
             // 
             // txtPVP
             // 
             this.txtPVP.Location = new System.Drawing.Point(218, 227);
             this.txtPVP.Name = "txtPVP";
             this.txtPVP.Size = new System.Drawing.Size(191, 23);
-            this.txtPVP.TabIndex = 1;
+            this.txtPVP.TabIndex = 5;
+            // 
+            // txtStock
+            // 
+            this.txtStock.Location = new System.Drawing.Point(218, 134);
+            this.txtStock.Name = "txtStock";
+            this.txtStock.Size = new System.Drawing.Size(191, 23);
+            this.txtStock.TabIndex = 3;
             // 
             // txtNombre
             // 
@@ -154,57 +189,24 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(164, 24);
+            this.label1.Location = new System.Drawing.Point(153, 25);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(257, 32);
-            this.label1.TabIndex = 4;
+            this.label1.TabIndex = 8;
             this.label1.Text = "Registro de Producto";
             // 
-            // txtStock
-            // 
-            this.txtStock.Location = new System.Drawing.Point(218, 134);
-            this.txtStock.Name = "txtStock";
-            this.txtStock.Size = new System.Drawing.Size(191, 23);
-            this.txtStock.TabIndex = 1;
-            // 
-            // lblStock
-            // 
-            this.lblStock.AutoSize = true;
-            this.lblStock.Location = new System.Drawing.Point(21, 142);
-            this.lblStock.Name = "lblStock";
-            this.lblStock.Size = new System.Drawing.Size(36, 15);
-            this.lblStock.TabIndex = 0;
-            this.lblStock.Text = "Stock";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(199, 183);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(13, 15);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "$";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(199, 235);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(13, 15);
-            this.label3.TabIndex = 3;
-            this.label3.Text = "$";
-            // 
-            // Register_product
+            // Register_products
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(571, 514);
+            this.ClientSize = new System.Drawing.Size(544, 440);
             this.Controls.Add(this.btnLimpiar);
             this.Controls.Add(this.btnAgregar);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label1);
-            this.Name = "Register_product";
-            this.Text = "Register_product";
+            this.Name = "Register_products";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Register_products";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
@@ -217,18 +219,18 @@
         private Button btnLimpiar;
         private Button btnAgregar;
         private GroupBox groupBox1;
+        private Label label3;
+        private Label label2;
         private Label lblPVP;
         private Label lblCosto;
+        private Label lblStock;
         private Label lblCodigo;
         private TextBox txtCodigo;
         private TextBox txtCosto;
         private TextBox txtPVP;
+        private TextBox txtStock;
         private TextBox txtNombre;
         private Label lblNombre;
         private Label label1;
-        private Label label3;
-        private Label label2;
-        private Label lblStock;
-        private TextBox txtStock;
     }
 }

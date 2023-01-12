@@ -10,11 +10,16 @@ using System.Windows.Forms;
 
 namespace Proyecto_Sistema_Inventario
 {
-    public partial class Register_product : Form
+    public partial class Register_products : Form
     {
-        public Register_product()
+        public Register_products()
         {
             InitializeComponent();
+        }
+
+        private void groupBox1_Enter(object sender, EventArgs e)
+        {
+
         }
     }
 }

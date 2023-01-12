@@ -30,6 +30,8 @@
         {
             this.btnActualizar = new System.Windows.Forms.Button();
             this.groupBoxDatosPersonales = new System.Windows.Forms.GroupBox();
+            this.cmbEstado = new System.Windows.Forms.ComboBox();
+            this.lblEstado = new System.Windows.Forms.Label();
             this.txtUTelefono = new System.Windows.Forms.TextBox();
             this.lblTelefono = new System.Windows.Forms.Label();
             this.txtUId = new System.Windows.Forms.TextBox();
@@ -39,14 +41,15 @@
             this.lblApellidos = new System.Windows.Forms.Label();
             this.lblNombre = new System.Windows.Forms.Label();
             this.lbHeader = new System.Windows.Forms.Label();
+            this.btnCancelar = new System.Windows.Forms.Button();
             this.groupBoxDatosPersonales.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnActualizar
             // 
-            this.btnActualizar.Location = new System.Drawing.Point(128, 244);
+            this.btnActualizar.Location = new System.Drawing.Point(179, 279);
             this.btnActualizar.Name = "btnActualizar";
-            this.btnActualizar.Size = new System.Drawing.Size(75, 23);
+            this.btnActualizar.Size = new System.Drawing.Size(86, 23);
             this.btnActualizar.TabIndex = 10;
             this.btnActualizar.Text = "Actualizar";
             this.btnActualizar.UseVisualStyleBackColor = true;
@@ -54,6 +57,8 @@
             // 
             // groupBoxDatosPersonales
             // 
+            this.groupBoxDatosPersonales.Controls.Add(this.cmbEstado);
+            this.groupBoxDatosPersonales.Controls.Add(this.lblEstado);
             this.groupBoxDatosPersonales.Controls.Add(this.txtUTelefono);
             this.groupBoxDatosPersonales.Controls.Add(this.lblTelefono);
             this.groupBoxDatosPersonales.Controls.Add(this.txtUId);
@@ -64,10 +69,32 @@
             this.groupBoxDatosPersonales.Controls.Add(this.lblNombre);
             this.groupBoxDatosPersonales.Location = new System.Drawing.Point(27, 85);
             this.groupBoxDatosPersonales.Name = "groupBoxDatosPersonales";
-            this.groupBoxDatosPersonales.Size = new System.Drawing.Size(280, 153);
+            this.groupBoxDatosPersonales.Size = new System.Drawing.Size(280, 188);
             this.groupBoxDatosPersonales.TabIndex = 8;
             this.groupBoxDatosPersonales.TabStop = false;
             this.groupBoxDatosPersonales.Text = "Datos Personales";
+            // 
+            // cmbEstado
+            // 
+            this.cmbEstado.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbEstado.FormattingEnabled = true;
+            this.cmbEstado.Items.AddRange(new object[] {
+            "activo",
+            "inactivo"});
+            this.cmbEstado.Location = new System.Drawing.Point(87, 151);
+            this.cmbEstado.Name = "cmbEstado";
+            this.cmbEstado.Size = new System.Drawing.Size(175, 23);
+            this.cmbEstado.TabIndex = 11;
+            this.cmbEstado.SelectedIndexChanged += new System.EventHandler(this.cmbEstado_SelectedIndexChanged);
+            // 
+            // lblEstado
+            // 
+            this.lblEstado.AutoSize = true;
+            this.lblEstado.Location = new System.Drawing.Point(13, 154);
+            this.lblEstado.Name = "lblEstado";
+            this.lblEstado.Size = new System.Drawing.Size(45, 15);
+            this.lblEstado.TabIndex = 12;
+            this.lblEstado.Text = "Estado:";
             // 
             // txtUTelefono
             // 
@@ -145,16 +172,29 @@
             this.lbHeader.Text = "Actualizar Datos";
             this.lbHeader.Click += new System.EventHandler(this.lbHeader_Click);
             // 
+            // btnCancelar
+            // 
+            this.btnCancelar.Location = new System.Drawing.Point(63, 279);
+            this.btnCancelar.Name = "btnCancelar";
+            this.btnCancelar.Size = new System.Drawing.Size(75, 23);
+            this.btnCancelar.TabIndex = 11;
+            this.btnCancelar.Text = "Cancelar";
+            this.btnCancelar.UseVisualStyleBackColor = true;
+            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
+            // 
             // Update_user
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(329, 281);
+            this.ClientSize = new System.Drawing.Size(329, 310);
+            this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.btnActualizar);
             this.Controls.Add(this.groupBoxDatosPersonales);
             this.Controls.Add(this.lbHeader);
             this.Name = "Update_user";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Update_user";
+            this.Load += new System.EventHandler(this.Update_user_Load);
             this.groupBoxDatosPersonales.ResumeLayout(false);
             this.groupBoxDatosPersonales.PerformLayout();
             this.ResumeLayout(false);
@@ -166,14 +206,17 @@
 
         private Button btnActualizar;
         private GroupBox groupBoxDatosPersonales;
-        private TextBox txtUTelefono;
         private Label lblTelefono;
-        private TextBox txtUId;
-        private TextBox txtUApellido;
-        private TextBox txtUNombre;
         private Label lblId;
         private Label lblApellidos;
         private Label lblNombre;
         private Label lbHeader;
+        public TextBox txtUTelefono;
+        public TextBox txtUId;
+        public TextBox txtUApellido;
+        public TextBox txtUNombre;
+        private Label lblEstado;
+        public ComboBox cmbEstado;
+        private Button btnCancelar;
     }
 }
