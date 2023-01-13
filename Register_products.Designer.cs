@@ -55,6 +55,7 @@
             this.btnLimpiar.TabIndex = 7;
             this.btnLimpiar.Text = "Limpiar";
             this.btnLimpiar.UseVisualStyleBackColor = true;
+            this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
             // 
             // btnAgregar
             // 
@@ -64,6 +65,7 @@
             this.btnAgregar.TabIndex = 6;
             this.btnAgregar.Text = "Agregar";
             this.btnAgregar.UseVisualStyleBackColor = true;
+            this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
             // 
             // groupBox1
             // 
@@ -154,6 +156,7 @@
             this.txtCosto.Name = "txtCosto";
             this.txtCosto.Size = new System.Drawing.Size(191, 23);
             this.txtCosto.TabIndex = 4;
+            this.txtCosto.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCosto_KeyPress);
             // 
             // txtPVP
             // 
@@ -161,6 +164,7 @@
             this.txtPVP.Name = "txtPVP";
             this.txtPVP.Size = new System.Drawing.Size(191, 23);
             this.txtPVP.TabIndex = 5;
+            this.txtPVP.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPVP_KeyPress);
             // 
             // txtStock
             // 
@@ -168,6 +172,7 @@
             this.txtStock.Name = "txtStock";
             this.txtStock.Size = new System.Drawing.Size(191, 23);
             this.txtStock.TabIndex = 3;
+            this.txtStock.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtStock_KeyPress);
             // 
             // txtNombre
             // 
@@ -207,6 +212,7 @@
             this.Name = "Register_products";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Register_products";
+            this.Load += new System.EventHandler(this.Register_products_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);

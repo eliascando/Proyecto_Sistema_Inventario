@@ -8,7 +8,6 @@ namespace Proyecto_Sistema_Inventario
 {
     internal class Producto
     {
-        private int id;
         private string nombre;
         private string codigo;
         private int stock;
@@ -19,9 +18,8 @@ namespace Proyecto_Sistema_Inventario
         {
 
         }
-        public Producto(int id, string nombre, string codigo, int stock, double precio, double costo)
+        public Producto(string nombre, string codigo, int stock, double precio, double costo)
         {
-            Id = id;
             Nombre = nombre;
             Codigo = codigo;
             Stock = stock;
@@ -29,7 +27,6 @@ namespace Proyecto_Sistema_Inventario
             Costo = costo;
         }
 
-        public int Id { get => id; set => id = value; }
         public string Nombre { get => nombre; set => nombre = value; }
         public string Codigo { get => codigo; set => codigo = value; }
         public int Stock { get => stock; set => stock = value; }

@@ -145,8 +145,6 @@ namespace Proyecto_Sistema_Inventario
             {
                 MessageBox.Show("ERROR! Debe elegir un usuario para actualizar...");
             }
-            
-
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -169,9 +167,9 @@ namespace Proyecto_Sistema_Inventario
 
         }
 
-        internal void ActualizadoCorrecto()
+        private void lblHeader_Click(object sender, EventArgs e)
         {
-            gridUsers.Refresh();
+
         }
     }
 }

@@ -69,7 +69,7 @@ namespace Proyecto_Sistema_Inventario
                 File.Replace(tempPath, path, null);
                 MessageBox.Show("Usuario Actualizado Correctamente!");
                 Admin_user admin = new Admin_user();
-                admin.Show();
+                admin.ShowDialog();
                 this.Close();
             }
             catch (Exception ex)
@@ -95,7 +95,7 @@ namespace Proyecto_Sistema_Inventario
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             Admin_user admin = new Admin_user();
-            admin.Show();
+            admin.ShowDialog();
             this.Close();
         }
     }

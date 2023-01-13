@@ -50,5 +50,17 @@ namespace Proyecto_Sistema_Inventario
             Register_products registrar = new Register_products();
             registrar.Show();
         }
+
+        private void consultarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Consult_products consultar = new Consult_products();
+            consultar.ShowDialog();
+        }
+
+        private void ingresarProductoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Stock_in ingreso = new Stock_in();
+            ingreso.ShowDialog();
+        }
     }
 }

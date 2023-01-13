@@ -33,13 +33,14 @@
             this.cboFilter = new System.Windows.Forms.ComboBox();
             this.gridUsers = new System.Windows.Forms.DataGridView();
             this.btnActualizar = new System.Windows.Forms.Button();
+            this.lblHeader = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.gridUsers)).BeginInit();
             this.SuspendLayout();
             // 
             // lblBuscar
             // 
             this.lblBuscar.AutoSize = true;
-            this.lblBuscar.Location = new System.Drawing.Point(121, 44);
+            this.lblBuscar.Location = new System.Drawing.Point(119, 93);
             this.lblBuscar.Name = "lblBuscar";
             this.lblBuscar.Size = new System.Drawing.Size(42, 15);
             this.lblBuscar.TabIndex = 0;
@@ -47,7 +48,7 @@
             // 
             // txtFiltro
             // 
-            this.txtFiltro.Location = new System.Drawing.Point(169, 41);
+            this.txtFiltro.Location = new System.Drawing.Point(167, 90);
             this.txtFiltro.Name = "txtFiltro";
             this.txtFiltro.Size = new System.Drawing.Size(188, 23);
             this.txtFiltro.TabIndex = 1;
@@ -60,7 +61,7 @@
             "Id",
             "Apellido",
             "Nombre"});
-            this.cboFilter.Location = new System.Drawing.Point(372, 41);
+            this.cboFilter.Location = new System.Drawing.Point(370, 90);
             this.cboFilter.Name = "cboFilter";
             this.cboFilter.Size = new System.Drawing.Size(121, 23);
             this.cboFilter.TabIndex = 2;
@@ -70,7 +71,7 @@
             // gridUsers
             // 
             this.gridUsers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.gridUsers.Location = new System.Drawing.Point(44, 83);
+            this.gridUsers.Location = new System.Drawing.Point(42, 132);
             this.gridUsers.Name = "gridUsers";
             this.gridUsers.RowTemplate.Height = 25;
             this.gridUsers.Size = new System.Drawing.Size(554, 249);
@@ -81,7 +82,7 @@
             // 
             // btnActualizar
             // 
-            this.btnActualizar.Location = new System.Drawing.Point(293, 349);
+            this.btnActualizar.Location = new System.Drawing.Point(291, 398);
             this.btnActualizar.Name = "btnActualizar";
             this.btnActualizar.Size = new System.Drawing.Size(75, 23);
             this.btnActualizar.TabIndex = 4;
@@ -89,11 +90,23 @@
             this.btnActualizar.UseVisualStyleBackColor = true;
             this.btnActualizar.Click += new System.EventHandler(this.btnActualizar_Click);
             // 
+            // lblHeader
+            // 
+            this.lblHeader.AutoSize = true;
+            this.lblHeader.Font = new System.Drawing.Font("Segoe UI", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblHeader.Location = new System.Drawing.Point(167, 25);
+            this.lblHeader.Name = "lblHeader";
+            this.lblHeader.Size = new System.Drawing.Size(288, 37);
+            this.lblHeader.TabIndex = 11;
+            this.lblHeader.Text = "Administrar Usuarios";
+            this.lblHeader.Click += new System.EventHandler(this.lblHeader_Click);
+            // 
             // Admin_user
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(647, 400);
+            this.ClientSize = new System.Drawing.Size(647, 435);
+            this.Controls.Add(this.lblHeader);
             this.Controls.Add(this.btnActualizar);
             this.Controls.Add(this.gridUsers);
             this.Controls.Add(this.cboFilter);
@@ -116,5 +129,6 @@
         private ComboBox cboFilter;
         private DataGridView gridUsers;
         private Button btnActualizar;
+        private Label lblHeader;
     }
 }

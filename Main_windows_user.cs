@@ -36,7 +36,13 @@ namespace Proyecto_Sistema_Inventario
         private void registrarProductoToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Register_products registrar = new Register_products();
-            registrar.Show();
+            registrar.ShowDialog();
+        }
+
+        private void consultarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Consult_products consultar = new Consult_products();
+            consultar.ShowDialog();
         }
     }
 }
