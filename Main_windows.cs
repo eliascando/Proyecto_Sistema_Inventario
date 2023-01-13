@@ -15,20 +15,19 @@ namespace Proyecto_Sistema_Inventario
         public Main_windows()
         {
             InitializeComponent();
-            Login_user login = new Login_user();
-            login.Close();
+            lblUser.Text = GlobalVaribales.user;
         }
 
         private void registrarNuevoToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Create_user crear = new Create_user();
-            crear.Show();
+            crear.ShowDialog();
         }
 
         private void administrarUsuariosToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Admin_user admin = new Admin_user();
-            admin.Show();
+            admin.ShowDialog();
         }
 
         private void Main_windows_Load(object sender, EventArgs e)
@@ -41,14 +40,17 @@ namespace Proyecto_Sistema_Inventario
             DialogResult result = MessageBox.Show("¿Estás seguro de que deseas Cerrar Sesión?", "Confirmación", MessageBoxButtons.YesNo);
             if (result == DialogResult.Yes)
             {
-                this.Close();
+                GlobalVaribales.user = "";
+                this.Hide();
+                Login_user login = new Login_user();
+                login.ShowDialog();
             } 
         }
 
         private void registrarProductoToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Register_products registrar = new Register_products();
-            registrar.Show();
+            registrar.ShowDialog();
         }
 
         private void consultarToolStripMenuItem_Click(object sender, EventArgs e)

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.VisualBasic.Logging;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -14,6 +15,7 @@ namespace Proyecto_Sistema_Inventario
     {
         public Consult_products()
         {
+            Login_user login = new Login_user();
             InitializeComponent();
             try
             {
@@ -61,22 +63,37 @@ namespace Proyecto_Sistema_Inventario
 
         private void btnActualizar_Click(object sender, EventArgs e)
         {
-            Update_products form = new Update_products();
-            if (gridProducts.SelectedRows.Count > 0)
+            try
             {
-                DataGridViewRow selectedRow = gridProducts.SelectedRows[0];
-                form.txtUNombre.Text = selectedRow.Cells[0].Value.ToString();
-                form.txtUCodigo.Text = selectedRow.Cells[1].Value.ToString();
-                form.txtUStock.Text = selectedRow.Cells[2].Value.ToString();
-                form.txtUCosto.Text = selectedRow.Cells[3].Value.ToString();
-                form.txtUPVP.Text = selectedRow.Cells[4].Value.ToString();
-                form.ShowDialog();
-                this.Close();
-            }
-            else
+                if (GlobalVaribales.isAdmin == true)
+                {
+                    Update_products form = new Update_products();
+                    if (gridProducts.SelectedRows.Count > 0)
+                    {
+                        DataGridViewRow selectedRow = gridProducts.SelectedRows[0];
+                        form.txtUNombre.Text = selectedRow.Cells[0].Value.ToString();
+                        form.txtUCodigo.Text = selectedRow.Cells[1].Value.ToString();
+                        form.txtUStock.Text = selectedRow.Cells[2].Value.ToString();
+                        form.txtUCosto.Text = selectedRow.Cells[3].Value.ToString();
+                        form.txtUPVP.Text = selectedRow.Cells[4].Value.ToString();
+                        form.ShowDialog();
+                        this.Close();
+                    }
+                    else
+                    {
+                        MessageBox.Show("ERROR! Debe elegir un producto...");
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Usuario no tiene acceso...");
+                }
+
+            }catch(Exception ex)
             {
-                MessageBox.Show("ERROR! Debe elegir un producto...");
-            }
+                MessageBox.Show("ERROR!" + ex);
+            }      
+           
         }
 
         private void txtFiltro_TextChanged(object sender, EventArgs e)
@@ -107,15 +124,15 @@ namespace Proyecto_Sistema_Inventario
                     return;
                 }
 
-                var filter = txtFiltro.Text;
+                var filter = txtFiltro.Text.ToLower();
                 IEnumerable<Producto> filteredProducts;
                 switch (cboFilter.SelectedItem)
                 {
                     case "Nombre":
-                        filteredProducts = products.Where(x => x.Nombre.Contains(filter));
+                        filteredProducts = products.Where(x => x.Nombre.ToLower().Contains(filter));
                         break;
                     case "Codigo":
-                        filteredProducts = products.Where(x => x.Codigo.Contains(filter));
+                        filteredProducts = products.Where(x => x.Codigo.ToLower().Contains(filter));
                         break;
                     default:
                         filteredProducts = products;

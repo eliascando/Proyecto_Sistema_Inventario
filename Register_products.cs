@@ -85,7 +85,8 @@ namespace Proyecto_Sistema_Inventario
             }
             catch(Exception ex)
             {
-                MessageBox.Show("ERROR! "+ ex.Message);
+                MessageBox.Show("ERROR! Debe llenar todos los campos...");
+                //MessageBox.Show("ERROR! "+ ex.Message);
             }
             
         }

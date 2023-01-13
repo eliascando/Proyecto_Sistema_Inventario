@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Update_user));
             this.btnActualizar = new System.Windows.Forms.Button();
             this.groupBoxDatosPersonales = new System.Windows.Forms.GroupBox();
             this.cmbEstado = new System.Windows.Forms.ComboBox();
@@ -191,9 +192,10 @@
             this.Controls.Add(this.btnActualizar);
             this.Controls.Add(this.groupBoxDatosPersonales);
             this.Controls.Add(this.lbHeader);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Update_user";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Update_user";
+            this.Text = "Minimarket JipiJapa";
             this.Load += new System.EventHandler(this.Update_user_Load);
             this.groupBoxDatosPersonales.ResumeLayout(false);
             this.groupBoxDatosPersonales.PerformLayout();

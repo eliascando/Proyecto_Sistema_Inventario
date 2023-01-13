@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Consult_products));
             this.btnActualizar = new System.Windows.Forms.Button();
             this.gridProducts = new System.Windows.Forms.DataGridView();
             this.cboFilter = new System.Windows.Forms.ComboBox();
@@ -108,9 +109,10 @@
             this.Controls.Add(this.cboFilter);
             this.Controls.Add(this.txtFiltro);
             this.Controls.Add(this.lblBuscar);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Consult_products";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Consult_products";
+            this.Text = "Minimarket JipiJapa";
             this.Load += new System.EventHandler(this.Consult_products_Load);
             ((System.ComponentModel.ISupportInitialize)(this.gridProducts)).EndInit();
             this.ResumeLayout(false);

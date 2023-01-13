@@ -52,7 +52,8 @@ namespace Proyecto_Sistema_Inventario
                     var values = line.Split(',');
                     if (values[4] == username && values[5] == password && values[6] == "activo")
                     {
-                        MessageBox.Show("Acceso Exitoso! Bienvenido " + values[0]); 
+                        MessageBox.Show("Acceso Exitoso! Bienvenido " + values[0]);
+                        GlobalVaribales.user = values[0] +" "+ values [1];
                         return true;
                     }
                 }

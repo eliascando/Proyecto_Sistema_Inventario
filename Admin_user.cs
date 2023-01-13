@@ -93,15 +93,15 @@ namespace Proyecto_Sistema_Inventario
                     return;
                 }
 
-                var filter = txtFiltro.Text;
+                var filter = txtFiltro.Text.ToLower();
                 IEnumerable<Usuario> filteredUsers;
                 switch (cboFilter.SelectedItem)
                 {
                     case "Nombre":
-                        filteredUsers = users.Where(x => x.Nombre.Contains(filter));
+                        filteredUsers = users.Where(x => x.Nombre.ToLower().Contains(filter));
                         break;
                     case "Apellido":
-                        filteredUsers = users.Where(x => x.Apellido.Contains(filter));
+                        filteredUsers = users.Where(x => x.Apellido.ToLower().Contains(filter));
                         break;
                     case "Id":
                         filteredUsers = users.Where(x => x.Id.Contains(filter));

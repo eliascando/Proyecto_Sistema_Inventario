@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Stock_in));
             this.lbHeader = new System.Windows.Forms.Label();
             this.cmbFiltro = new System.Windows.Forms.ComboBox();
             this.txtFiltro = new System.Windows.Forms.TextBox();
@@ -117,9 +118,10 @@
             this.Controls.Add(this.txtFiltro);
             this.Controls.Add(this.cmbFiltro);
             this.Controls.Add(this.lbHeader);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Stock_in";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = " ";
+            this.Text = "Minimarket JipiJapa";
             this.Load += new System.EventHandler(this.Stock_in_Load);
             ((System.ComponentModel.ISupportInitialize)(this.gridSelect)).EndInit();
             this.ResumeLayout(false);

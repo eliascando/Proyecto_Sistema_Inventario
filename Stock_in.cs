@@ -76,15 +76,15 @@ namespace Proyecto_Sistema_Inventario
                     return;
                 }
 
-                var filter = txtFiltro.Text;
+                var filter = txtFiltro.Text.ToLower();
                 IEnumerable<Producto> filteredProducts;
                 switch (cmbFiltro.SelectedItem)
                 {
                     case "Nombre":
-                        filteredProducts = products.Where(x => x.Nombre.Contains(filter));
+                        filteredProducts = products.Where(x => x.Nombre.ToLower().Contains(filter));
                         break;
                     case "Código":
-                        filteredProducts = products.Where(x => x.Codigo.Contains(filter));
+                        filteredProducts = products.Where(x => x.Codigo.ToLower().Contains(filter));
                         break;
                     default:
                         filteredProducts = products;

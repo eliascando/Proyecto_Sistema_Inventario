@@ -12,11 +12,17 @@ namespace Proyecto_Sistema_Inventario
 {
     public partial class Login_user : Form
     {
+        public string isAdmin;
         public Login_user()
         {
             InitializeComponent();
             checkVerPass.CheckedChanged += checkVerPass_CheckedChanged;
 
+        }
+
+        public Login_user(string isAdmin)
+        {
+            this.isAdmin = isAdmin;
         }
 
         private void btnIniciarSesion_Click(object sender, EventArgs e)
@@ -41,9 +47,12 @@ namespace Proyecto_Sistema_Inventario
 
             if(username == userAdmin.User && password == userAdmin.Pass)
             {
+                GlobalVaribales.isAdmin = true;
+                GlobalVaribales.user = "Administrador";
                 MessageBox.Show("Acceso Exitoso! Bienvenido Administrador...");
                 Main_windows windowsadmin = new Main_windows();
-                windowsadmin.Show();
+                windowsadmin.ShowDialog();
+                this.Close();
                 txtUser.Text = "";
                 txtPass.Text = "";
             }
@@ -51,8 +60,10 @@ namespace Proyecto_Sistema_Inventario
             {
                 if (user.IsValidUser(username, password))
                 {
+                    GlobalVaribales.isAdmin = false;
                     Main_windows_user main = new Main_windows_user();
-                    main.Show();
+                    main.ShowDialog();
+                    this.Close();
                     txtUser.Text = "";
                     txtPass.Text = "";
 

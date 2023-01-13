@@ -16,7 +16,6 @@ namespace Proyecto_Sistema_Inventario
         {
             InitializeComponent();
             txtUCodigo.ReadOnly= true;
-            txtUStock.ReadOnly= true;
         }
 
         private void Update_products_Load(object sender, EventArgs e)

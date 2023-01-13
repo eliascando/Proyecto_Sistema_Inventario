@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Create_user));
             this.lbHeader = new System.Windows.Forms.Label();
             this.lblNombre = new System.Windows.Forms.Label();
             this.lblApellidos = new System.Windows.Forms.Label();
@@ -225,9 +226,10 @@
             this.Controls.Add(this.groupBoxDatosLogin);
             this.Controls.Add(this.groupBoxDatosPersonales);
             this.Controls.Add(this.lbHeader);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Create_user";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Create_user";
+            this.Text = "Minimarket JipiJapa";
             this.Load += new System.EventHandler(this.Create_user_Load);
             this.groupBoxDatosPersonales.ResumeLayout(false);
             this.groupBoxDatosPersonales.PerformLayout();

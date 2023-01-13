@@ -15,8 +15,7 @@ namespace Proyecto_Sistema_Inventario
         public Main_windows_user()
         {
             InitializeComponent();
-            Login_user login = new Login_user();
-            login.Close();
+            lblUser.Text = GlobalVaribales.user;
         }
 
         private void Main_windows_user_Load(object sender, EventArgs e)
@@ -29,7 +28,11 @@ namespace Proyecto_Sistema_Inventario
             DialogResult result = MessageBox.Show("¿Estás seguro de que deseas Cerrar Sesión?", "Confirmación", MessageBoxButtons.YesNo);
             if (result == DialogResult.Yes)
             {
-                this.Close();
+                GlobalVaribales.user = "";
+                this.Hide();
+                Login_user login = new Login_user();             
+                login.ShowDialog();
+                
             }
         }
 
@@ -43,6 +46,12 @@ namespace Proyecto_Sistema_Inventario
         {
             Consult_products consultar = new Consult_products();
             consultar.ShowDialog();
+        }
+
+        private void ingresarProductoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Stock_in stock = new Stock_in();
+            stock.ShowDialog();
         }
     }
 }
