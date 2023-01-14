@@ -33,7 +33,5 @@ namespace Proyecto_Sistema_Inventario
         public double Precio { get => precio; set => precio = value; }
         public double Costo { get => costo; set => costo = value; }
 
-
-
     }
 }

@@ -44,11 +44,13 @@ namespace Proyecto_Sistema_Inventario
                         var values = line.Split(',');
                         if (values[1] == codigo_buscar)
                         {
+                            string precio = txtUPVP.Text.Replace(',', '.');
+                            string costo = txtUCosto.Text.Replace(',', '.');
                             values[0] = txtUNombre.Text;
                             values[1] = values[1];
                             values[2] = txtUStock.Text;
-                            values[3] = txtUCosto.Text;
-                            values[4] = txtUPVP.Text;
+                            values[3] = costo;
+                            values[4] = precio;
                         }
                         products.Add(values);
                     }
@@ -109,12 +111,13 @@ namespace Proyecto_Sistema_Inventario
                             linesToKeep.Add(line);
                         }
                         File.WriteAllLines("productos.csv", linesToKeep);
-                        MessageBox.Show("Registro eliminado exitosamente!");
-                        Consult_products consult = new Consult_products();
-                        consult.ShowDialog();
-                        this.Close();
                     }
-                }catch (Exception ex)
+                    MessageBox.Show("Registro eliminado exitosamente!");
+                    Consult_products consult = new Consult_products();
+                    consult.ShowDialog();
+                    this.Close();
+                }
+                catch (Exception ex)
                 {
                     MessageBox.Show("ERROR!"+ex.Message);
                 }

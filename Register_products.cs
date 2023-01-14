@@ -63,7 +63,9 @@ namespace Proyecto_Sistema_Inventario
                     // Agrega el producto al archivo
                     using (StreamWriter sw = new StreamWriter("productos.csv", true))
                     {
-                        string row = string.Format("{0},{1},{2},{3},{4}", product.Nombre, product.Codigo, product.Stock, product.Precio, product.Costo);
+                        string precio = product.Precio.ToString().Replace(',', '.');
+                        string costo = product.Costo.ToString().Replace(',', '.');
+                        string row = string.Format("{0},{1},{2},{3},{4}", product.Nombre, product.Codigo, product.Stock, precio, costo);
                         sw.WriteLine(row);
                     }
                     MessageBox.Show("Producto Registrado Exitosamente!");
@@ -85,8 +87,7 @@ namespace Proyecto_Sistema_Inventario
             }
             catch(Exception ex)
             {
-                MessageBox.Show("ERROR! Debe llenar todos los campos...");
-                //MessageBox.Show("ERROR! "+ ex.Message);
+                MessageBox.Show("ERROR! "+ ex.Message);
             }
             
         }
@@ -107,7 +108,7 @@ namespace Proyecto_Sistema_Inventario
 
         private void txtCosto_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != ','))
             {
                 e.Handled = true;
             }
@@ -115,7 +116,7 @@ namespace Proyecto_Sistema_Inventario
 
         private void txtPVP_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != ','))
             {
                 e.Handled = true;
             }

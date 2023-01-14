@@ -79,6 +79,7 @@
             this.gridUsers.TabIndex = 3;
             this.gridUsers.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridUsers_CellClick);
             this.gridUsers.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
+            this.gridUsers.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.gridUsers_CellFormatting);
             this.gridUsers.Enter += new System.EventHandler(this.gridUsers_Enter);
             // 
             // btnActualizar

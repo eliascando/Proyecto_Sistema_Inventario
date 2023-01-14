@@ -20,6 +20,10 @@ namespace Proyecto_Sistema_Inventario
             try
             {
                 gridProducts.ReadOnly = true;
+                if (!File.Exists("productos.csv"))
+                {
+                    File.Create("productos.csv").Close();
+                }
                 string filePath = "productos.csv";
                 var products = new List<Producto>();
 
@@ -43,6 +47,14 @@ namespace Proyecto_Sistema_Inventario
                 }
                 gridProducts.DataSource = products;
                 gridProducts.AutoGenerateColumns = true;
+
+                foreach (DataGridViewColumn col in gridProducts.Columns)
+                {
+                    if (col.DataPropertyName == "Precio" || col.DataPropertyName == "Costo")
+                    {
+                        col.DefaultCellStyle.Format = "0,00";
+                    }
+                }
             }
             catch (Exception ex)
             {
@@ -150,6 +162,21 @@ namespace Proyecto_Sistema_Inventario
         private void cboFilter_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void gridProducts_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (gridProducts.Columns[e.ColumnIndex].Name == "Precio" && gridProducts.Columns[e.ColumnIndex].Name == "Costo" && e.Value != null)
+            {
+                double value = (double)e.Value;
+                e.Value = value.ToString("N2");
+                e.FormattingApplied = true;
+            }
         }
     }
 }

@@ -60,67 +60,79 @@ namespace Proyecto_Sistema_Inventario
 
         private void btnRegistrar_Click(object sender, EventArgs e)
         {
-            Usuario user = new Usuario();
-            user.Nombre = txtNombre.Text;
-            user.Apellido= txtApellido.Text;
-            user.Id= txtId.Text;
-            user.Telefono= txtTelefono.Text;
-            user.User= txtUser.Text;
-            user.Pass= txtPass.Text;
-            user.Estado = "activo";
-
-            if (string.IsNullOrEmpty(txtNombre.Text) ||
-               string.IsNullOrEmpty(txtApellido.Text) ||
-               string.IsNullOrEmpty(txtId.Text) ||
-               string.IsNullOrEmpty(txtTelefono.Text) ||
-               string.IsNullOrEmpty(txtUser.Text) ||
-               string.IsNullOrEmpty(txtPass.Text))
+            try
             {
-                MessageBox.Show("ERROR! Debe llenar todos los campos...");
-                return;
-            }
-
-            List<Usuario> usuarios = new List<Usuario>();
-
-            string[] lines = File.ReadAllLines("usuarios.csv");
-            bool existe = false;
-            foreach (string line in lines)
-            {
-                string[] values = line.Split(',');
-                if (values[2] == txtId.Text)
+                if (!File.Exists("usuarios.csv"))
                 {
-                    existe = true;
-                    break;
+                    File.Create("usuarios.csv").Close();
+                }
+                Usuario user = new Usuario();
+                user.Nombre = txtNombre.Text;
+                user.Apellido = txtApellido.Text;
+                user.Id = txtId.Text;
+                user.Telefono = txtTelefono.Text;
+                user.User = txtUser.Text;
+                user.Pass = txtPass.Text;
+                user.Estado = "activo";
+
+                if (string.IsNullOrEmpty(txtNombre.Text) ||
+                   string.IsNullOrEmpty(txtApellido.Text) ||
+                   string.IsNullOrEmpty(txtId.Text) ||
+                   string.IsNullOrEmpty(txtTelefono.Text) ||
+                   string.IsNullOrEmpty(txtUser.Text) ||
+                   string.IsNullOrEmpty(txtPass.Text))
+                {
+                    MessageBox.Show("ERROR! Debe llenar todos los campos...");
+                    return;
+                }
+
+                List<Usuario> usuarios = new List<Usuario>();
+
+                string[] lines = File.ReadAllLines("usuarios.csv");
+                bool existe = false;
+                foreach (string line in lines)
+                {
+                    string[] values = line.Split(',');
+                    if (values[2] == txtId.Text)
+                    {
+                        existe = true;
+                        break;
+                    }
+                }
+
+                if (!existe)
+                {
+                    // Agrega el usuario al archivo
+                    using (StreamWriter sw = new StreamWriter("usuarios.csv", true))
+                    {
+                        string row = string.Format("{0},{1},{2},{3},{4},{5},{6}", user.Nombre, user.Apellido, user.Id, user.Telefono, user.User, user.Pass, user.Estado);
+                        sw.WriteLine(row);
+                    }
+                    MessageBox.Show("Usuario Registrado Exitosamente!");
+
+                    txtNombre.Text = "";
+                    txtApellido.Text = "";
+                    txtId.Text = "";
+                    txtTelefono.Text = "";
+                    txtUser.Text = "";
+                    txtPass.Text = "";
+                }
+                else
+                {
+                    MessageBox.Show("ERROR! Usuario ya registrado...");
+                    txtNombre.Text = "";
+                    txtApellido.Text = "";
+                    txtId.Text = "";
+                    txtTelefono.Text = "";
+                    txtUser.Text = "";
+                    txtPass.Text = "";
                 }
             }
-
-            if (!existe)
+            catch (Exception ex)
             {
-                // Agrega el usuario al archivo
-                using (StreamWriter sw = new StreamWriter("usuarios.csv", true))
-                {
-                    string row = string.Format("{0},{1},{2},{3},{4},{5},{6}", user.Nombre, user.Apellido, user.Id, user.Telefono, user.User, user.Pass,user.Estado);
-                    sw.WriteLine(row);
-                }
-                MessageBox.Show("Usuario Registrado Exitosamente!");
-
-                txtNombre.Text = "";
-                txtApellido.Text = "";
-                txtId.Text = "";
-                txtTelefono.Text = "";
-                txtUser.Text = "";
-                txtPass.Text = "";
+                MessageBox.Show("ERROR!" + ex);
             }
-            else
-            {
-                MessageBox.Show("ERROR! Usuario ya registrado...");
-                txtNombre.Text = "";
-                txtApellido.Text = "";
-                txtId.Text = "";
-                txtTelefono.Text = "";
-                txtUser.Text = "";
-                txtPass.Text = "";
-            }
+            
         }
 
         private void button1_Click(object sender, EventArgs e)

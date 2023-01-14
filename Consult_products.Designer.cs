@@ -54,9 +54,10 @@
             this.gridProducts.Location = new System.Drawing.Point(32, 114);
             this.gridProducts.Name = "gridProducts";
             this.gridProducts.RowTemplate.Height = 25;
-            this.gridProducts.Size = new System.Drawing.Size(538, 249);
+            this.gridProducts.Size = new System.Drawing.Size(543, 249);
             this.gridProducts.TabIndex = 8;
             this.gridProducts.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridUsers_CellContentClick);
+            this.gridProducts.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.gridProducts_CellFormatting);
             // 
             // cboFilter
             // 

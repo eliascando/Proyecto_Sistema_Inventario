@@ -12,6 +12,10 @@ namespace Proyecto_Sistema_Inventario
             try
             {
                 gridUsers.ReadOnly = true;
+                if (!File.Exists("usuarios.csv"))
+                {
+                    File.Create("usuarios.csv").Close();
+                }
                 string filePath = "usuarios.csv";
                 var users = new List<Usuario>();
 
@@ -29,6 +33,7 @@ namespace Proyecto_Sistema_Inventario
                             Id = values[2],
                             Telefono = values[3],
                             User = values[4],
+                            Pass = values[5],
                             Estado = values[6],
                         };
                         users.Add(user);
@@ -36,7 +41,9 @@ namespace Proyecto_Sistema_Inventario
                 }
                 gridUsers.DataSource = users;
                 gridUsers.AutoGenerateColumns = true;
-            }catch (Exception ex)
+
+            }
+            catch (Exception ex)
             {
                 MessageBox.Show("ERROR! "+ ex);
             }finally { gridUsers.ResumeLayout(); }
@@ -170,6 +177,14 @@ namespace Proyecto_Sistema_Inventario
         private void lblHeader_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void gridUsers_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (gridUsers.Columns[e.ColumnIndex].Name == "Pass" && e.Value != null)
+            {
+                e.Value = new String('*', e.Value.ToString().Length);
+            }
         }
     }
 }

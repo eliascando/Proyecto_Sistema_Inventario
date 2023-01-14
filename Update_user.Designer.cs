@@ -48,7 +48,7 @@
             // 
             // btnActualizar
             // 
-            this.btnActualizar.Location = new System.Drawing.Point(179, 279);
+            this.btnActualizar.Location = new System.Drawing.Point(178, 261);
             this.btnActualizar.Name = "btnActualizar";
             this.btnActualizar.Size = new System.Drawing.Size(86, 23);
             this.btnActualizar.TabIndex = 10;
@@ -68,7 +68,7 @@
             this.groupBoxDatosPersonales.Controls.Add(this.lblId);
             this.groupBoxDatosPersonales.Controls.Add(this.lblApellidos);
             this.groupBoxDatosPersonales.Controls.Add(this.lblNombre);
-            this.groupBoxDatosPersonales.Location = new System.Drawing.Point(27, 85);
+            this.groupBoxDatosPersonales.Location = new System.Drawing.Point(26, 67);
             this.groupBoxDatosPersonales.Name = "groupBoxDatosPersonales";
             this.groupBoxDatosPersonales.Size = new System.Drawing.Size(280, 188);
             this.groupBoxDatosPersonales.TabIndex = 8;
@@ -166,7 +166,7 @@
             // 
             this.lbHeader.AutoSize = true;
             this.lbHeader.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lbHeader.Location = new System.Drawing.Point(63, 37);
+            this.lbHeader.Location = new System.Drawing.Point(62, 19);
             this.lbHeader.Name = "lbHeader";
             this.lbHeader.Size = new System.Drawing.Size(202, 32);
             this.lbHeader.TabIndex = 7;
@@ -175,7 +175,7 @@
             // 
             // btnCancelar
             // 
-            this.btnCancelar.Location = new System.Drawing.Point(63, 279);
+            this.btnCancelar.Location = new System.Drawing.Point(62, 261);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(75, 23);
             this.btnCancelar.TabIndex = 11;
@@ -187,7 +187,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(329, 310);
+            this.ClientSize = new System.Drawing.Size(329, 301);
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.btnActualizar);
             this.Controls.Add(this.groupBoxDatosPersonales);
