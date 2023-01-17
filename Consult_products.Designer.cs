@@ -122,12 +122,11 @@
         }
 
         #endregion
-
-        private Button btnActualizar;
         private DataGridView gridProducts;
         private ComboBox cboFilter;
         private TextBox txtFiltro;
         private Label lblBuscar;
         private Label lblHeader;
+        public Button btnActualizar;
     }
 }

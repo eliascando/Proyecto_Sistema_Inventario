@@ -15,10 +15,18 @@ namespace Proyecto_Sistema_Inventario
     {
         public Consult_products()
         {
-            Login_user login = new Login_user();
             InitializeComponent();
+            if (GlobalVaribales.isAdmin == false)
+            {
+                btnActualizar.Visible = false;
+            }
+            else
+            {
+                btnActualizar.Visible = true;
+            }
             try
             {
+                Login_user login = new Login_user();
                 gridProducts.ReadOnly = true;
                 if (!File.Exists("productos.csv"))
                 {
@@ -77,8 +85,6 @@ namespace Proyecto_Sistema_Inventario
         {
             try
             {
-                if (GlobalVaribales.isAdmin == true)
-                {
                     Update_products form = new Update_products();
                     if (gridProducts.SelectedRows.Count > 0)
                     {
@@ -95,11 +101,6 @@ namespace Proyecto_Sistema_Inventario
                     {
                         MessageBox.Show("ERROR! Debe elegir un producto...");
                     }
-                }
-                else
-                {
-                    MessageBox.Show("Usuario no tiene acceso...");
-                }
 
             }catch(Exception ex)
             {
