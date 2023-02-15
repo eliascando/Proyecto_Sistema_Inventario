@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -13,6 +14,8 @@ namespace Proyecto_Sistema_Inventario
 {
     public partial class Consult_products : Form
     {
+        private BindingSource bindingSource;
+
         public Consult_products()
         {
             InitializeComponent();
@@ -26,49 +29,45 @@ namespace Proyecto_Sistema_Inventario
             }
             try
             {
-                Login_user login = new Login_user();
-                gridProducts.ReadOnly = true;
-                if (!File.Exists("productos.csv"))
-                {
-                    File.Create("productos.csv").Close();
-                }
-                string filePath = "productos.csv";
-                var products = new List<Producto>();
+            // Crear el BindingSource y configurarlo como origen de datos del DataGridView
+            bindingSource = new BindingSource();
+            gridProducts.DataSource = bindingSource;
 
-                using (var reader = new StreamReader(filePath))
-                {
-                    while (!reader.EndOfStream)
-                    {
-                        var line = reader.ReadLine();
-                        var values = line.Split(',');
+            // Crear un DataTable y agregar las columnas correspondientes
+            DataTable dataTable = new DataTable();
+            dataTable.Columns.Add("Nombre");
+            dataTable.Columns.Add("Codigo");
+            dataTable.Columns.Add("Stock");
+            dataTable.Columns.Add("Costo");
+            dataTable.Columns.Add("Precio");
 
-                        var product = new Producto()
-                        {
-                            Nombre = values[0],
-                            Codigo= values[1],
-                            Stock = int.Parse(values[2]),
-                            Precio = double.Parse(values[3]),
-                            Costo = double.Parse(values[4])
-                        };
-                        products.Add(product);
-                    }
-                }
-                gridProducts.DataSource = products;
-                gridProducts.AutoGenerateColumns = true;
-
-                foreach (DataGridViewColumn col in gridProducts.Columns)
-                {
-                    if (col.DataPropertyName == "Precio" || col.DataPropertyName == "Costo")
-                    {
-                        col.DefaultCellStyle.Format = "0,00";
-                    }
-                }
-            }
-            catch (Exception ex)
+            // Recuperar los datos de los productos de la base de datos y agregarlos al DataTable
+            using (SqlConnection cn = new SqlConnection("Data Source=.;Initial Catalog=BD_PSI;Integrated Security=True"))
             {
-                MessageBox.Show("ERROR! " + ex);
+                cn.Open();
+                SqlCommand cmd = new SqlCommand("SELECT codigo, nombre, stock, costo, precio FROM Producto", cn);
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    DataRow row = dataTable.NewRow();
+                    row["Codigo"] = reader.GetInt32(0).ToString();
+                    row["Nombre"] = reader.GetString(1);
+                    row["Stock"] = reader.GetInt32(2).ToString();
+                    row["Costo"] = reader.GetFloat(3).ToString();
+                    row["Precio"] = reader.GetFloat(4).ToString();
+                    dataTable.Rows.Add(row);
+                }
             }
-            finally { gridProducts.ResumeLayout(); }
+            // Establecer el DataTable como origen de datos del BindingSource
+            bindingSource.DataSource = dataTable;
+            }catch(Exception ex)
+            {
+                MessageBox.Show("Error!: " + ex.Message);
+            }
+            finally
+            {
+                ConexionBD.CerrarConexion();
+            }
         }
 
         private void gridUsers_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -76,8 +75,10 @@ namespace Proyecto_Sistema_Inventario
 
         }
 
+
         private void Consult_products_Load(object sender, EventArgs e)
         {
+          
 
         }
 
@@ -111,53 +112,17 @@ namespace Proyecto_Sistema_Inventario
 
         private void txtFiltro_TextChanged(object sender, EventArgs e)
         {
-            try
+            if (string.IsNullOrEmpty(txtFiltro.Text) || cboFilter.SelectedIndex == -1)
             {
-                var products = new List<Producto>();
-                using (var reader = new StreamReader("productos.csv"))
-                {
-                    while (!reader.EndOfStream)
-                    {
-                        var line = reader.ReadLine();
-                        var values = line.Split(',');
-                        var product = new Producto()
-                        {
-                            Nombre = values[0],
-                            Codigo = values[1],
-                            Stock = int.Parse(values[2]),
-                            Costo = double.Parse(values[3]),
-                            Precio = double.Parse(values[4])
-                        };
-                        products.Add(product);
-                    }
-                }
-                if (string.IsNullOrEmpty(txtFiltro.Text) || cboFilter.SelectedIndex == -1)
-                {
-                    gridProducts.DataSource = products;
-                    return;
-                }
+                bindingSource.RemoveFilter();
+                return;
+            }
 
-                var filter = txtFiltro.Text.ToLower();
-                IEnumerable<Producto> filteredProducts;
-                switch (cboFilter.SelectedItem)
-                {
-                    case "Nombre":
-                        filteredProducts = products.Where(x => x.Nombre.ToLower().Contains(filter));
-                        break;
-                    case "Codigo":
-                        filteredProducts = products.Where(x => x.Codigo.ToLower().Contains(filter));
-                        break;
-                    default:
-                        filteredProducts = products;
-                        break;
-                }
-                gridProducts.DataSource = filteredProducts.ToList();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("ERROR!" + ex);
-            }
-            finally { gridProducts.Refresh(); }
+            string filterColumn = cboFilter.SelectedItem.ToString();
+            string filterText = txtFiltro.Text;
+
+            // Filtrar los datos utilizando la propiedad Filter del BindingSource
+            bindingSource.Filter = $"{filterColumn} LIKE '%{filterText}%'";
         }
 
         private void cboFilter_SelectedIndexChanged(object sender, EventArgs e)

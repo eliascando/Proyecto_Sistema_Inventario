@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Data.SqlClient;
 
 namespace Proyecto_Sistema_Inventario
 {
@@ -44,50 +45,86 @@ namespace Proyecto_Sistema_Inventario
                     return;
                 }
 
-                List<Producto> productos = new List<Producto>();
-
-                string[] lines = File.ReadAllLines("productos.csv");
-                bool existe = false;
-                foreach (string line in lines)
+                if (ConexionBD.AbrirConexion())
                 {
-                    string[] values = line.Split(',');
-                    if (values[1] == txtCodigo.Text)
+                    MessageBox.Show("Conexion Exitosa!");
+                    string query = "INSERT INTO Producto (codigo, nombre, stock, precio, costo) VALUES (@codigo, @nombre, @stock, @precio, @costo)";
+                    using (SqlCommand cmd = new SqlCommand(query, ConexionBD.cn))
                     {
-                        existe = true;
-                        break;
+                        cmd.Parameters.AddWithValue("@codigo", txtCodigo.Text);
+                        cmd.Parameters.AddWithValue("@nombre", txtNombre.Text);
+                        cmd.Parameters.AddWithValue("@stock", int.Parse(txtStock.Text));
+                        cmd.Parameters.AddWithValue("@precio", double.Parse(txtPVP.Text));
+                        cmd.Parameters.AddWithValue("@costo", double.Parse(txtCosto.Text));
+                        int rowsAffected = cmd.ExecuteNonQuery();
+                        if (rowsAffected > 0)
+                        {
+                            MessageBox.Show("Producto registrado exitosamente!");
+                        }
+                        else
+                        {
+                            MessageBox.Show("No se pudo registrar el producto.");
+                        }
+                        ConexionBD.CerrarConexion();
+                        txtCodigo.Text = "";
+                        txtNombre.Text = "";
+                        txtStock.Text = "";
+                        txtCosto.Text = "";
+                        txtPVP.Text = "";
                     }
-                }
-
-                if (!existe)
-                {
-                    // Agrega el producto al archivo
-                    using (StreamWriter sw = new StreamWriter("productos.csv", true))
-                    {
-                        string precio = product.Precio.ToString().Replace(',', '.');
-                        string costo = product.Costo.ToString().Replace(',', '.');
-                        string row = string.Format("{0},{1},{2},{3},{4}", product.Nombre, product.Codigo, product.Stock, precio, costo);
-                        sw.WriteLine(row);
-                    }
-                    MessageBox.Show("Producto Registrado Exitosamente!");
-                    txtCodigo.Text = "";
-                    txtNombre.Text = "";
-                    txtStock.Text = "";
-                    txtCosto.Text = "";
-                    txtPVP.Text = "";
                 }
                 else
                 {
-                    MessageBox.Show("ERROR! Producto ya registrado...");
-                    txtCodigo.Text = "";
-                    txtNombre.Text = "";
-                    txtStock.Text = "";
-                    txtCosto.Text = "";
-                    txtPVP.Text = "";
+                    MessageBox.Show("Error de Conexion Con la Base de Datos!");
+                    ConexionBD.CerrarConexion();
+
                 }
+
+                //List<Producto> productos = new List<Producto>();
+
+                //string[] lines = File.ReadAllLines("productos.csv");
+                //bool existe = false;
+                //foreach (string line in lines)
+                //{
+                //    string[] values = line.Split(',');
+                //    if (values[1] == txtCodigo.Text)
+                //    {
+                //        existe = true;
+                //        break;
+                //    }
+                //}
+
+                //if (!existe)
+                //{
+                //    // Agrega el producto al archivo
+                //    using (StreamWriter sw = new StreamWriter("productos.csv", true))
+                //    {
+                //        string precio = product.Precio.ToString().Replace(',', '.');
+                //        string costo = product.Costo.ToString().Replace(',', '.');
+                //        string row = string.Format("{0},{1},{2},{3},{4}", product.Nombre, product.Codigo, product.Stock, precio, costo);
+                //        sw.WriteLine(row);
+                //    }
+                //    MessageBox.Show("Producto Registrado Exitosamente!");
+                //    txtCodigo.Text = "";
+                //    txtNombre.Text = "";
+                //    txtStock.Text = "";
+                //    txtCosto.Text = "";
+                //    txtPVP.Text = "";
+                //}
+                //else
+                //{
+                //    MessageBox.Show("ERROR! Producto ya registrado...");
+                //    txtCodigo.Text = "";
+                //    txtNombre.Text = "";
+                //    txtStock.Text = "";
+                //    txtCosto.Text = "";
+                //    txtPVP.Text = "";
+                //}
             }
             catch(Exception ex)
             {
                 MessageBox.Show("ERROR! "+ ex.Message);
+                ConexionBD.CerrarConexion();
             }
             
         }

@@ -134,7 +134,8 @@
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(97, 15);
             this.label10.TabIndex = 9;
-            this.label10.Text = "version 1.0 (beta)";
+            this.label10.Text = "version 1.1 (beta)";
+            this.label10.Click += new System.EventHandler(this.label10_Click);
             // 
             // Acerca_de
             // 

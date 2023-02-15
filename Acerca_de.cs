@@ -21,5 +21,10 @@ namespace Proyecto_Sistema_Inventario
         {
 
         }
+
+        private void label10_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
