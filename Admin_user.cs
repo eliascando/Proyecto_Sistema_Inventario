@@ -1,53 +1,60 @@
 using Microsoft.VisualBasic.ApplicationServices;
 using System.Data;
+using System.Data.SqlClient;
 using System.Windows.Forms;
 
 namespace Proyecto_Sistema_Inventario
 {
     public partial class Admin_user : Form
     {
+        private BindingSource bindingSource;
         public Admin_user()
         {
             InitializeComponent();
             try
             {
-                gridUsers.ReadOnly = true;
-                if (!File.Exists("usuarios.csv"))
-                {
-                    File.Create("usuarios.csv").Close();
-                }
-                string filePath = "usuarios.csv";
-                var users = new List<Usuario>();
+                // Crear el BindingSource y configurarlo como origen de datos del DataGridView
+                bindingSource = new BindingSource();
+                gridUsers.DataSource = bindingSource;
 
-                using (var reader = new StreamReader(filePath))
+                // Crear un DataTable y agregar las columnas correspondientes
+                DataTable dataTable = new DataTable();
+                dataTable.Columns.Add("Id");
+                dataTable.Columns.Add("Nombre");
+                dataTable.Columns.Add("Apellido");
+                dataTable.Columns.Add("Teléfono");
+                dataTable.Columns.Add("Usuario");
+                dataTable.Columns.Add("Estado");
+
+                // Recuperar los datos de los usuarios y sus credenciales de la base de datos y agregarlos al DataTable
+                using (SqlConnection cn = new SqlConnection("Data Source=.;Initial Catalog=BD_PSI;Integrated Security=True"))
                 {
-                    while (!reader.EndOfStream)
+                    cn.Open();
+                    SqlCommand cmd = new SqlCommand("SELECT Usuario.id, nombre, apellido, telefono, usuario, estado FROM Usuario INNER JOIN Credenciales_Acceso ON Usuario.id = Credenciales_Acceso.id_usuario", cn);
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read())
                     {
-                        var line = reader.ReadLine();
-                        var values = line.Split(',');
-
-                        var user = new Usuario()
-                        {
-                            Nombre = values[0],
-                            Apellido = values[1],
-                            Id = values[2],
-                            Telefono = values[3],
-                            User = values[4],
-                            Pass = values[5],
-                            Estado = values[6],
-                        };
-                        users.Add(user);
+                        DataRow row = dataTable.NewRow();
+                        row["Id"] = reader.GetInt32(0).ToString();
+                        row["Nombre"] = reader.GetString(1);
+                        row["Apellido"] = reader.GetString(2);
+                        row["Teléfono"] = reader.GetString(3);
+                        row["Usuario"] = reader.GetString(4);
+                        row["Estado"] = reader.GetString(5);
+                        dataTable.Rows.Add(row);
                     }
                 }
-                gridUsers.DataSource = users;
-                gridUsers.AutoGenerateColumns = true;
-
+                // Establecer el DataTable como origen de datos del BindingSource
+                bindingSource.DataSource = dataTable;
             }
             catch (Exception ex)
             {
-                MessageBox.Show("ERROR! "+ ex);
-            }finally { gridUsers.ResumeLayout(); }
-            
+                MessageBox.Show("Error!: " + ex.Message);
+            }
+            finally
+            {
+                ConexionBD.CerrarConexion();
+            }
         }
 
 
@@ -73,59 +80,18 @@ namespace Proyecto_Sistema_Inventario
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-            try
+            if (string.IsNullOrEmpty(txtFiltro.Text) || cboFilter.SelectedIndex == -1)
             {
-                var users = new List<Usuario>();
-                using (var reader = new StreamReader("usuarios.csv"))
-                {
-                    while (!reader.EndOfStream)
-                    {
-                        var line = reader.ReadLine();
-                        var values = line.Split(',');
-                        var user = new Usuario()
-                        {
-                            Nombre = values[0],
-                            Apellido = values[1],
-                            Id = values[2],
-                            Telefono = values[3],
-                            User = values[4],
-                            Estado = values[6],
-                        };
-                        users.Add(user);
-                    }
-                }
-                if (string.IsNullOrEmpty(txtFiltro.Text) || cboFilter.SelectedIndex == -1)
-                {
-                    gridUsers.DataSource = users;
-                    return;
-                }
-
-                var filter = txtFiltro.Text.ToLower();
-                IEnumerable<Usuario> filteredUsers;
-                switch (cboFilter.SelectedItem)
-                {
-                    case "Nombre":
-                        filteredUsers = users.Where(x => x.Nombre.ToLower().Contains(filter));
-                        break;
-                    case "Apellido":
-                        filteredUsers = users.Where(x => x.Apellido.ToLower().Contains(filter));
-                        break;
-                    case "Id":
-                        filteredUsers = users.Where(x => x.Id.Contains(filter));
-                        break;
-                    default:
-                        filteredUsers = users;
-                        break;
-                }
-                gridUsers.DataSource = filteredUsers.ToList();
+                bindingSource.RemoveFilter();
+                return;
             }
-            catch(Exception ex)
-            {
-                MessageBox.Show("ERROR!" + ex);
-            }finally { gridUsers.Refresh(); }   
-           
 
-    }
+            string filterColumn = cboFilter.SelectedItem.ToString();
+            string filterText = txtFiltro.Text;
+
+            // Filtrar los datos utilizando la propiedad Filter del BindingSource
+            bindingSource.Filter = $"{filterColumn} LIKE '%{filterText}%'";
+        }
 
         private void btnActualizar_Click(object sender, EventArgs e)
         {
@@ -133,19 +99,11 @@ namespace Proyecto_Sistema_Inventario
             if (gridUsers.SelectedRows.Count > 0)
             {
                 DataGridViewRow selectedRow = gridUsers.SelectedRows[0];
-                form.txtUNombre.Text = selectedRow.Cells[0].Value.ToString();
-                form.txtUApellido.Text = selectedRow.Cells[1].Value.ToString();
-                form.txtUId.Text = selectedRow.Cells[2].Value.ToString();
-                form.txtUTelefono.Text = selectedRow.Cells[3].Value.ToString();
+                form.txtUId.Text = selectedRow.Cells[0].Value.ToString().Trim(); 
+                form.txtUNombre.Text = selectedRow.Cells[1].Value.ToString().Trim();
+                form.txtUApellido.Text = selectedRow.Cells[2].Value.ToString().Trim();              
+                form.txtUTelefono.Text = selectedRow.Cells[3].Value.ToString().Trim();
                 form.ShowDialog();
-                string estado = selectedRow.Cells[6].Value.ToString();
-                if (estado == "activo")
-                {
-                    form.cmbEstado.SelectedIndex = 0;
-                }else if(estado == "inactivo")
-                {
-                    form.cmbEstado.SelectedIndex = 1;
-                }
                 this.Close();
             }
             else
@@ -181,10 +139,12 @@ namespace Proyecto_Sistema_Inventario
 
         private void gridUsers_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            if (gridUsers.Columns[e.ColumnIndex].Name == "Pass" && e.Value != null)
-            {
-                e.Value = new String('*', e.Value.ToString().Length);
-            }
+
+        }
+
+        private void btn_Cancelar_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

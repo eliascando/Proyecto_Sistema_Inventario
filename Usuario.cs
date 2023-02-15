@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Security.Cryptography;
+using System.Data.SqlClient;
+using System.Reflection.Metadata.Ecma335;
 
 namespace Proyecto_Sistema_Inventario
 {
@@ -42,26 +44,42 @@ namespace Proyecto_Sistema_Inventario
 
         public bool IsValidUser(string username, string password)
         {
-            string filePath = "usuarios.csv";
-
-            using (var reader = new StreamReader(filePath))
+            bool isvalid;
+            using (var connection = new SqlConnection("Data Source=.;Initial Catalog=BD_PSI;Integrated Security=True"))
             {
-                while (!reader.EndOfStream)
+                connection.Open();
+                var command = new SqlCommand($"SELECT nombre, apellido, password FROM Credenciales_Acceso INNER JOIN Usuario ON Usuario.id = Credenciales_Acceso.id_usuario WHERE usuario = '{username}' AND estado ='activo'", connection);
+
+                var reader = command.ExecuteReader();
+
+                if (reader.Read())
                 {
-                    var line = reader.ReadLine();
-                    var values = line.Split(',');
-                    if (values[4] == username && values[5] == password && values[6] == "activo")
+                    string enteredPassword;
+                    string nombre = reader.GetString(0).Trim();
+                    string apellido = reader.GetString(1).Trim();
+                    var storedPassword = reader.GetString(2);
+
+                    // Encriptar la contraseña ingresada por el usuario con SHA256
+                    using (var sha256 = SHA256.Create())
                     {
-                        MessageBox.Show("Acceso Exitoso! Bienvenido " + values[0]);
-                        GlobalVaribales.user = values[0] +" "+ values [1];
-                        return true;
+                        byte[] hash = sha256.ComputeHash(Encoding.UTF8.GetBytes(password));
+                        string hashedPassword = Convert.ToBase64String(hash);
+                        enteredPassword = hashedPassword;
                     }
+                    // Comparar las contraseñas encriptadas
+
+                    isvalid = enteredPassword == storedPassword;
+                    MessageBox.Show("Acceso Exitoso! Bienvenido " + nombre);
+                    GlobalVaribales.user = nombre+" "+apellido;
+                    return isvalid;
                 }
+                else
+                {
+                    return false;
+                }
+
             }
 
-            return false;
         }
-
-
     }
 }

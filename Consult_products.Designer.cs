@@ -35,12 +35,13 @@
             this.txtFiltro = new System.Windows.Forms.TextBox();
             this.lblBuscar = new System.Windows.Forms.Label();
             this.lblHeader = new System.Windows.Forms.Label();
+            this.btnCancelar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.gridProducts)).BeginInit();
             this.SuspendLayout();
             // 
             // btnActualizar
             // 
-            this.btnActualizar.Location = new System.Drawing.Point(273, 379);
+            this.btnActualizar.Location = new System.Drawing.Point(322, 379);
             this.btnActualizar.Name = "btnActualizar";
             this.btnActualizar.Size = new System.Drawing.Size(75, 23);
             this.btnActualizar.TabIndex = 9;
@@ -99,11 +100,22 @@
             this.lblHeader.TabIndex = 10;
             this.lblHeader.Text = "Consultar Productos";
             // 
+            // btnCancelar
+            // 
+            this.btnCancelar.Location = new System.Drawing.Point(192, 379);
+            this.btnCancelar.Name = "btnCancelar";
+            this.btnCancelar.Size = new System.Drawing.Size(75, 23);
+            this.btnCancelar.TabIndex = 16;
+            this.btnCancelar.Text = "Cancelar";
+            this.btnCancelar.UseVisualStyleBackColor = true;
+            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
+            // 
             // Consult_products
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(614, 421);
+            this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.lblHeader);
             this.Controls.Add(this.btnActualizar);
             this.Controls.Add(this.gridProducts);
@@ -128,5 +140,6 @@
         private Label lblBuscar;
         private Label lblHeader;
         public Button btnActualizar;
+        private Button btnCancelar;
     }
 }

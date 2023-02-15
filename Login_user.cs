@@ -29,11 +29,6 @@ namespace Proyecto_Sistema_Inventario
         {
             try
             {
-                if (!File.Exists("usuarios.csv"))
-                {
-                    File.Create("usuarios.csv").Close();
-                }
-
                 Usuario user = new Usuario();
                 string username = txtUser.Text;
                 string password = txtPass.Text;

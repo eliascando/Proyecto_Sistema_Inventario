@@ -41,6 +41,7 @@ namespace Proyecto_Sistema_Inventario
             dataTable.Columns.Add("Costo");
             dataTable.Columns.Add("Precio");
 
+
             // Recuperar los datos de los productos de la base de datos y agregarlos al DataTable
             using (SqlConnection cn = new SqlConnection("Data Source=.;Initial Catalog=BD_PSI;Integrated Security=True"))
             {
@@ -60,7 +61,19 @@ namespace Proyecto_Sistema_Inventario
             }
             // Establecer el DataTable como origen de datos del BindingSource
             bindingSource.DataSource = dataTable;
-            }catch(Exception ex)
+            gridProducts.CellFormatting += (sender, e) =>
+            {
+                if (e.ColumnIndex == gridProducts.Columns["Costo"].Index ||
+                    e.ColumnIndex == gridProducts.Columns["Precio"].Index)
+                {
+                    if (e.Value != null && float.TryParse(e.Value.ToString(), out float value))
+                    {
+                        e.Value = value.ToString("C2");
+                    }
+                }
+            };
+            }
+            catch(Exception ex)
             {
                 MessageBox.Show("Error!: " + ex.Message);
             }
@@ -143,6 +156,11 @@ namespace Proyecto_Sistema_Inventario
                 e.Value = value.ToString("N2");
                 e.FormattingApplied = true;
             }
+        }
+
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

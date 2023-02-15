@@ -12,6 +12,10 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using CsvHelper;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using System.Data.SqlClient;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
+using Microsoft.VisualBasic;
+using System.Reflection;
 
 namespace Proyecto_Sistema_Inventario
 {
@@ -36,50 +40,37 @@ namespace Proyecto_Sistema_Inventario
         private void btnActualizar_Click(object sender, EventArgs e)
         {
             string id_buscar = txtUId.Text;
+            string nombre = txtUNombre.Text;
+            string apellido = txtUApellido.Text;
+            string telefono = txtUTelefono.Text;
+            string estado = cmbEstado.Text;
+
             try
             {
-                string path = "usuarios.csv";
-                string tempPath = "temp.csv";
-                List<string[]> usuarios = new List<string[]>();
-                using (var reader = new StreamReader(path))
+                using (var connection = new SqlConnection("Data Source=.;Initial Catalog=BD_PSI;Integrated Security=True"))
                 {
-                    while (!reader.EndOfStream)
+                    connection.Open();
+                    var command = new SqlCommand($"UPDATE Usuario SET nombre = '{nombre}', apellido = '{apellido}', telefono = '{telefono}', estado = '{estado}' FROM Usuario INNER JOIN Credenciales_Acceso ON Usuario.id = Credenciales_Acceso.id_usuario WHERE Usuario.id = '{id_buscar}'", connection);
+
+                    int rowsAffected = command.ExecuteNonQuery();
+                    if (rowsAffected > 0)
                     {
-                        var line = reader.ReadLine();
-                        var values = line.Split(',');
-                        if (values[2] == id_buscar)
-                        {
-                            values[0] = txtUNombre.Text;
-                            values[1] = txtUApellido.Text;
-                            values[3] = txtUTelefono.Text;
-                            values[4] = values[4];
-                            values[5] = values[5];
-                            values[6] = cmbEstado.Text;
-                        }
-                        usuarios.Add(values);
+                        MessageBox.Show("Usuario Actualizado Correctamente!");
+                        Admin_user admin = new Admin_user();
+                        admin.ShowDialog();
+                        this.Close();
+                    }
+                    else
+                    {
+                        MessageBox.Show("No se encontró ningún usuario con el ID especificado");
                     }
                 }
-                using (var writer = new StreamWriter(tempPath))
-                {
-                    foreach (string[] values in usuarios)
-                    {
-                        writer.WriteLine(string.Join(",", values));
-                    }
-                }
-                File.Replace(tempPath, path, null);
-                MessageBox.Show("Usuario Actualizado Correctamente!");
-                Admin_user admin = new Admin_user();
-                admin.ShowDialog();
-                this.Close();
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
-            finally
-            {
 
-            }
         }
 
         private void Update_user_Load(object sender, EventArgs e)

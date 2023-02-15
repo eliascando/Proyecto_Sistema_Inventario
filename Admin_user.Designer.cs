@@ -35,6 +35,7 @@
             this.gridUsers = new System.Windows.Forms.DataGridView();
             this.btnActualizar = new System.Windows.Forms.Button();
             this.lblHeader = new System.Windows.Forms.Label();
+            this.btn_Cancelar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.gridUsers)).BeginInit();
             this.SuspendLayout();
             // 
@@ -103,11 +104,22 @@
             this.lblHeader.Text = "Administrar Usuarios";
             this.lblHeader.Click += new System.EventHandler(this.lblHeader_Click);
             // 
+            // btn_Cancelar
+            // 
+            this.btn_Cancelar.Location = new System.Drawing.Point(181, 398);
+            this.btn_Cancelar.Name = "btn_Cancelar";
+            this.btn_Cancelar.Size = new System.Drawing.Size(75, 23);
+            this.btn_Cancelar.TabIndex = 12;
+            this.btn_Cancelar.Text = "Cancelar";
+            this.btn_Cancelar.UseVisualStyleBackColor = true;
+            this.btn_Cancelar.Click += new System.EventHandler(this.btn_Cancelar_Click);
+            // 
             // Admin_user
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(647, 435);
+            this.Controls.Add(this.btn_Cancelar);
             this.Controls.Add(this.lblHeader);
             this.Controls.Add(this.btnActualizar);
             this.Controls.Add(this.gridUsers);
@@ -133,5 +145,6 @@
         private DataGridView gridUsers;
         private Button btnActualizar;
         private Label lblHeader;
+        private Button btn_Cancelar;
     }
 }
