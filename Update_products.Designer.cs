@@ -92,6 +92,7 @@
             this.txtUPVP.Name = "txtUPVP";
             this.txtUPVP.Size = new System.Drawing.Size(175, 23);
             this.txtUPVP.TabIndex = 13;
+            this.txtUPVP.TextChanged += new System.EventHandler(this.txtUPVP_TextChanged);
             // 
             // lblEstado
             // 
@@ -108,6 +109,7 @@
             this.txtUCosto.Name = "txtUCosto";
             this.txtUCosto.Size = new System.Drawing.Size(175, 23);
             this.txtUCosto.TabIndex = 8;
+            this.txtUCosto.TextChanged += new System.EventHandler(this.txtUCosto_TextChanged);
             // 
             // lblTelefono
             // 
@@ -124,6 +126,7 @@
             this.txtUStock.Name = "txtUStock";
             this.txtUStock.Size = new System.Drawing.Size(175, 23);
             this.txtUStock.TabIndex = 6;
+            this.txtUStock.TextChanged += new System.EventHandler(this.txtUStock_TextChanged);
             // 
             // txtUCodigo
             // 
@@ -139,6 +142,7 @@
             this.txtUNombre.Name = "txtUNombre";
             this.txtUNombre.Size = new System.Drawing.Size(175, 23);
             this.txtUNombre.TabIndex = 4;
+            this.txtUNombre.TextChanged += new System.EventHandler(this.txtUNombre_TextChanged);
             // 
             // lblId
             // 

@@ -28,11 +28,11 @@ namespace Proyecto_Sistema_Inventario
             try
             {
                 Producto product = new Producto();
-                product.Nombre = txtNombre.Text;
-                product.Codigo = txtCodigo.Text;
-                product.Stock = int.Parse(txtStock.Text);
-                product.Precio = double.Parse(txtPVP.Text);
-                product.Costo = double.Parse(txtCosto.Text);
+                product.Nombre = txtNombre.Text.Trim();
+                product.Codigo = txtCodigo.Text.Trim();
+                product.Stock = int.Parse(txtStock.Text.Trim());
+                product.Precio = double.Parse(txtPVP.Text.Trim());
+                product.Costo = double.Parse(txtCosto.Text.Trim());
 
                 if (string.IsNullOrEmpty(txtNombre.Text) ||
                    string.IsNullOrEmpty(txtCodigo.Text) ||
@@ -46,7 +46,6 @@ namespace Proyecto_Sistema_Inventario
 
                 if (ConexionBD.AbrirConexion())
                 {
-                    MessageBox.Show("Conexion Exitosa!");
                     string query = "INSERT INTO Producto (codigo, nombre, stock, precio, costo) VALUES (@codigo, @nombre, @stock, @precio, @costo)";
                     using (SqlCommand cmd = new SqlCommand(query, ConexionBD.cn))
                     {
@@ -62,7 +61,7 @@ namespace Proyecto_Sistema_Inventario
                         }
                         else
                         {
-                            MessageBox.Show("No se pudo registrar el producto.");
+                            MessageBox.Show("ERROR!: No se pudo registrar el producto.");
                         }
                         ConexionBD.CerrarConexion();
                         txtCodigo.Text = "";
@@ -74,7 +73,7 @@ namespace Proyecto_Sistema_Inventario
                 }
                 else
                 {
-                    MessageBox.Show("Error de Conexion Con la Base de Datos!");
+                    MessageBox.Show("ERROR!: Conexion Con la Base de Datos!");
 
                 }
             }

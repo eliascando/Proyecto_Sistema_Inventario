@@ -21,10 +21,11 @@ namespace Proyecto_Sistema_Inventario
 {
     public partial class Update_user : Form
     {
-        public Update_user()
+        private Admin_user adminUser;
+        public Update_user(Admin_user adminUser)
         {
             InitializeComponent();
-
+            this.adminUser = adminUser;
         }
 
         private void lbHeader_Click(object sender, EventArgs e)
@@ -47,28 +48,32 @@ namespace Proyecto_Sistema_Inventario
 
             try
             {
-                using (var connection = new SqlConnection("Data Source=.;Initial Catalog=BD_PSI;Integrated Security=True"))
+                DialogResult result = MessageBox.Show("¿Estás seguro de que desea actualizar Usuario?", "Confirmación", MessageBoxButtons.OKCancel);
+                if (result == DialogResult.OK)
                 {
-                    connection.Open();
-                    var command = new SqlCommand($"UPDATE Usuario SET nombre = '{nombre}', apellido = '{apellido}', telefono = '{telefono}', estado = '{estado}' FROM Usuario INNER JOIN Credenciales_Acceso ON Usuario.id = Credenciales_Acceso.id_usuario WHERE Usuario.id = '{id_buscar}'", connection);
-
-                    int rowsAffected = command.ExecuteNonQuery();
-                    if (rowsAffected > 0)
+                    using (var connection = new SqlConnection("Data Source=.;Initial Catalog=BD_PSI;Integrated Security=True"))
                     {
-                        MessageBox.Show("Usuario Actualizado Correctamente!");
-                        Admin_user admin = new Admin_user();
-                        admin.ShowDialog();
-                        this.Close();
-                    }
-                    else
-                    {
-                        MessageBox.Show("No se encontró ningún usuario con el ID especificado");
+                        connection.Open();
+                        var command = new SqlCommand($"UPDATE Usuario SET nombre = '{nombre}', apellido = '{apellido}', telefono = '{telefono}' FROM Usuario INNER JOIN Credenciales_Acceso ON Usuario.id = Credenciales_Acceso.id_usuario WHERE Usuario.id = '{id_buscar}'", connection);
+                        command.ExecuteNonQuery();
+                        command = new SqlCommand($"UPDATE Credenciales_Acceso SET estado = '{estado}' WHERE id_usuario = '{id_buscar}'", connection);
+                        int rowsAffected = command.ExecuteNonQuery();
+                        if (rowsAffected > 0)
+                        {
+                            MessageBox.Show("Usuario Actualizado Correctamente!");
+                            adminUser.ActualizarTabla();
+                            this.Close();
+                        }
+                        else
+                        {
+                            MessageBox.Show("No se encontró ningún usuario con el ID especificado");
+                        }
                     }
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show("Error!: "+ex.Message);
             }
 
         }
@@ -85,8 +90,6 @@ namespace Proyecto_Sistema_Inventario
 
         private void btnCancelar_Click(object sender, EventArgs e)
         {
-            Admin_user admin = new Admin_user();
-            admin.ShowDialog();
             this.Close();
         }
     }

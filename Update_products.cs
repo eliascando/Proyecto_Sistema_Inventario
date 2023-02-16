@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -12,10 +13,13 @@ namespace Proyecto_Sistema_Inventario
 {
     public partial class Update_products : Form
     {
-        public Update_products()
+        private Consult_products consultaForm;
+
+        public Update_products(Consult_products consultaForm)
         {
             InitializeComponent();
             txtUCodigo.ReadOnly= true;
+            this.consultaForm = consultaForm;
         }
 
         private void Update_products_Load(object sender, EventArgs e)
@@ -30,58 +34,51 @@ namespace Proyecto_Sistema_Inventario
 
         private void btnActualizar_Click(object sender, EventArgs e)
         {
-            string codigo_buscar = txtUCodigo.Text;
-            try
+            try 
             {
-                string path = "productos.csv";
-                string tempPath = "temp.csv";
-                List<string[]> products = new List<string[]>();
-                using (var reader = new StreamReader(path))
+                Producto u_producto = new Producto();
+                u_producto.Codigo = txtUCodigo.Text;
+                u_producto.Nombre = txtUNombre.Text.Trim();
+                u_producto.Stock = int.Parse(txtUStock.Text.Trim());
+                u_producto.Precio = double.Parse(txtUPVP.Text.Trim());
+                u_producto.Costo = double.Parse(txtUCosto.Text.Trim());
+                using (SqlConnection cn = new SqlConnection("Data Source =.; Initial Catalog = BD_PSI; Integrated Security = True"))
                 {
-                    while (!reader.EndOfStream)
+                    cn.Open();
+                    string query = "UPDATE Producto SET nombre = @nombre, stock = @stock, precio = @precio, costo = @costo WHERE codigo = @codigo";
+                    SqlCommand command = new SqlCommand(query, cn);
+                    command.Parameters.AddWithValue("@nombre", u_producto.Nombre);
+                    command.Parameters.AddWithValue("@stock", u_producto.Stock);
+                    command.Parameters.AddWithValue("@precio", u_producto.Precio);
+                    command.Parameters.AddWithValue("@costo", u_producto.Costo);
+                    command.Parameters.AddWithValue("@codigo", u_producto.Codigo);
+                    int rowsAffected = command.ExecuteNonQuery();
+                    if (rowsAffected > 0)
                     {
-                        var line = reader.ReadLine();
-                        var values = line.Split(',');
-                        if (values[1] == codigo_buscar)
-                        {
-                            string precio = txtUPVP.Text.Replace(',', '.');
-                            string costo = txtUCosto.Text.Replace(',', '.');
-                            values[0] = txtUNombre.Text;
-                            values[1] = values[1];
-                            values[2] = txtUStock.Text;
-                            values[3] = costo;
-                            values[4] = precio;
-                        }
-                        products.Add(values);
+                        MessageBox.Show("Producto Actualizado Correctamente!");
+                        consultaForm.ActualizarTabla();
+                        this.Close();
+
+                    }
+                    else
+                    {
+                        MessageBox.Show("No se encontró ningún producto con el código especificado!");
                     }
                 }
-                using (var writer = new StreamWriter(tempPath))
-                {
-                    foreach (string[] values in products)
-                    {
-                        writer.WriteLine(string.Join(",", values));
-                    }
-                }
-                File.Replace(tempPath, path, null);
-                MessageBox.Show("Producto Actualizado Correctamente!");
-                this.Close();
+
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show("ERROR!: " + ex);
             }
             finally
             {
-                Consult_products consult = new Consult_products();
-                consult.ShowDialog();
-                
+                ConexionBD.CerrarConexion();
             }
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
         {
-            Consult_products consult = new Consult_products();
-            consult.ShowDialog();
             this.Close();
         }
 
@@ -97,25 +94,25 @@ namespace Proyecto_Sistema_Inventario
             {
                 try
                 {
-                    string[] lines = File.ReadAllLines("productos.csv");
-                    List<string> linesToKeep = new List<string>();
-                    foreach (string line in lines)
+                    using (SqlConnection cn = new SqlConnection("Data Source =.; Initial Catalog = BD_PSI; Integrated Security = True"))
                     {
-                        string[] values = line.Split(',');
-                    }
-                    foreach (string line in lines)
-                    {
-                        string[] values = line.Split(',');
-                        if (values[1] != txtUCodigo.Text)
+                        cn.Open();
+                        string query = "DELETE FROM Producto WHERE codigo = @codigo";
+                        SqlCommand command = new SqlCommand(query, cn);
+                        command.Parameters.AddWithValue("@codigo", txtUCodigo.Text);
+                        int rowsAffected = command.ExecuteNonQuery();
+                        if (rowsAffected > 0)
                         {
-                            linesToKeep.Add(line);
+                            MessageBox.Show("Registro eliminado exitosamente!");
+                            consultaForm.ActualizarTabla();
+                            this.Close();
                         }
-                        File.WriteAllLines("productos.csv", linesToKeep);
+                        else
+                        {
+                            MessageBox.Show("No se encontró ningún producto con el código especificado");
+                        }
                     }
-                    MessageBox.Show("Registro eliminado exitosamente!");
-                    Consult_products consult = new Consult_products();
-                    consult.ShowDialog();
-                    this.Close();
+
                 }
                 catch (Exception ex)
                 {
@@ -125,5 +122,26 @@ namespace Proyecto_Sistema_Inventario
             }
             
         }
+
+        private void txtUNombre_TextChanged(object sender, EventArgs e)
+        {
+            GlobalVaribales.changed_nombre = true;
+        }
+
+        private void txtUStock_TextChanged(object sender, EventArgs e)
+        {
+            GlobalVaribales.changed_stock = true;
+        }
+
+        private void txtUCosto_TextChanged(object sender, EventArgs e)
+        {
+            GlobalVaribales.changed_costo = true;
+        }
+
+        private void txtUPVP_TextChanged(object sender, EventArgs e)
+        {
+            GlobalVaribales.changed_precio = true;
+        }
     }
+
 }

@@ -15,9 +15,12 @@ namespace Proyecto_Sistema_Inventario
     public partial class Consult_products : Form
     {
         private BindingSource bindingSource;
+        
+
 
         public Consult_products()
         {
+
             InitializeComponent();
             if (GlobalVaribales.isAdmin == false)
             {
@@ -29,11 +32,68 @@ namespace Proyecto_Sistema_Inventario
             }
             try
             {
-            // Crear el BindingSource y configurarlo como origen de datos del DataGridView
-            bindingSource = new BindingSource();
-            gridProducts.DataSource = bindingSource;
+                // Crear el BindingSource y configurarlo como origen de datos del DataGridView
+                bindingSource = new BindingSource();
+                gridProducts.DataSource = bindingSource;
+                gridProducts.ReadOnly = true;
+                gridProducts.AllowUserToOrderColumns = false;
+                gridProducts.AllowUserToResizeColumns= false;
+                gridProducts.AllowUserToResizeRows = false;
 
-            // Crear un DataTable y agregar las columnas correspondientes
+                // Crear un DataTable y agregar las columnas correspondientes
+                DataTable dataTable = new DataTable();
+                dataTable.Columns.Add("Nombre");
+                dataTable.Columns.Add("Codigo");
+                dataTable.Columns.Add("Stock");
+                dataTable.Columns.Add("Costo");
+                dataTable.Columns.Add("Precio");
+
+
+                // Recuperar los datos de los productos de la base de datos y agregarlos al DataTable
+                using (SqlConnection cn = new SqlConnection("Data Source=.;Initial Catalog=BD_PSI;Integrated Security=True"))
+                {
+                    cn.Open();
+                    SqlCommand cmd = new SqlCommand("SELECT codigo, nombre, stock, costo, precio FROM Producto", cn);
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        DataRow row = dataTable.NewRow();
+                        row["Codigo"] = reader.GetInt32(0).ToString();
+                        row["Nombre"] = reader.GetString(1);
+                        row["Stock"] = reader.GetInt32(2).ToString();
+                        row["Costo"] = reader.GetFloat(3).ToString();
+                        row["Precio"] = reader.GetFloat(4).ToString();
+                        dataTable.Rows.Add(row);
+                    }
+                }
+                // Establecer el DataTable como origen de datos del BindingSource
+                bindingSource.DataSource = dataTable;
+
+                // Formato Moneda para las columnas Costo y Precio
+                gridProducts.CellFormatting += (sender, e) =>
+                {
+                    if (e.ColumnIndex == gridProducts.Columns["Costo"].Index ||
+                        e.ColumnIndex == gridProducts.Columns["Precio"].Index)
+                    {
+                        if (e.Value != null && float.TryParse(e.Value.ToString(), out float value))
+                        {
+                            e.Value = value.ToString("C2");
+                        }
+                    }
+                };
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("Error!: " + ex.Message);
+            }
+            finally
+            {
+                ConexionBD.CerrarConexion();
+            }
+        }
+        private Update_products UpdateProducts;
+        public void ActualizarTabla()
+        {
             DataTable dataTable = new DataTable();
             dataTable.Columns.Add("Nombre");
             dataTable.Columns.Add("Codigo");
@@ -41,8 +101,6 @@ namespace Proyecto_Sistema_Inventario
             dataTable.Columns.Add("Costo");
             dataTable.Columns.Add("Precio");
 
-
-            // Recuperar los datos de los productos de la base de datos y agregarlos al DataTable
             using (SqlConnection cn = new SqlConnection("Data Source=.;Initial Catalog=BD_PSI;Integrated Security=True"))
             {
                 cn.Open();
@@ -58,29 +116,11 @@ namespace Proyecto_Sistema_Inventario
                     row["Precio"] = reader.GetFloat(4).ToString();
                     dataTable.Rows.Add(row);
                 }
+                cn.Close();
             }
-            // Establecer el DataTable como origen de datos del BindingSource
+
             bindingSource.DataSource = dataTable;
-            gridProducts.CellFormatting += (sender, e) =>
-            {
-                if (e.ColumnIndex == gridProducts.Columns["Costo"].Index ||
-                    e.ColumnIndex == gridProducts.Columns["Precio"].Index)
-                {
-                    if (e.Value != null && float.TryParse(e.Value.ToString(), out float value))
-                    {
-                        e.Value = value.ToString("C2");
-                    }
-                }
-            };
-            }
-            catch(Exception ex)
-            {
-                MessageBox.Show("Error!: " + ex.Message);
-            }
-            finally
-            {
-                ConexionBD.CerrarConexion();
-            }
+            gridProducts.DataSource = bindingSource;
         }
 
         private void gridUsers_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -99,17 +139,16 @@ namespace Proyecto_Sistema_Inventario
         {
             try
             {
-                    Update_products form = new Update_products();
+                    Update_products form = new Update_products(this);
                     if (gridProducts.SelectedRows.Count > 0)
                     {
                         DataGridViewRow selectedRow = gridProducts.SelectedRows[0];
-                        form.txtUNombre.Text = selectedRow.Cells[0].Value.ToString();
-                        form.txtUCodigo.Text = selectedRow.Cells[1].Value.ToString();
-                        form.txtUStock.Text = selectedRow.Cells[2].Value.ToString();
-                        form.txtUCosto.Text = selectedRow.Cells[3].Value.ToString();
-                        form.txtUPVP.Text = selectedRow.Cells[4].Value.ToString();
+                        form.txtUNombre.Text = selectedRow.Cells[0].Value.ToString().Trim();
+                        form.txtUCodigo.Text = selectedRow.Cells[1].Value.ToString().Trim();
+                        form.txtUStock.Text = selectedRow.Cells[2].Value.ToString().Trim();
+                        form.txtUCosto.Text = selectedRow.Cells[3].Value.ToString().Trim();
+                        form.txtUPVP.Text = selectedRow.Cells[4].Value.ToString().Trim();
                         form.ShowDialog();
-                        this.Close();
                     }
                     else
                     {
@@ -150,12 +189,7 @@ namespace Proyecto_Sistema_Inventario
 
         private void gridProducts_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            if (gridProducts.Columns[e.ColumnIndex].Name == "Precio" && gridProducts.Columns[e.ColumnIndex].Name == "Costo" && e.Value != null)
-            {
-                double value = (double)e.Value;
-                e.Value = value.ToString("N2");
-                e.FormattingApplied = true;
-            }
+
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)

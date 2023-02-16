@@ -16,6 +16,10 @@ namespace Proyecto_Sistema_Inventario
                 // Crear el BindingSource y configurarlo como origen de datos del DataGridView
                 bindingSource = new BindingSource();
                 gridUsers.DataSource = bindingSource;
+                gridUsers.ReadOnly= true;
+                gridUsers.AllowUserToOrderColumns = false;
+                gridUsers.AllowUserToResizeColumns = false;
+                gridUsers.AllowUserToResizeRows = false;
 
                 // Crear un DataTable y agregar las columnas correspondientes
                 DataTable dataTable = new DataTable();
@@ -56,6 +60,37 @@ namespace Proyecto_Sistema_Inventario
                 ConexionBD.CerrarConexion();
             }
         }
+        public void ActualizarTabla()
+        {
+            DataTable dataTable = new DataTable();
+            dataTable.Columns.Add("Id");
+            dataTable.Columns.Add("Nombre");
+            dataTable.Columns.Add("Apellido");
+            dataTable.Columns.Add("Teléfono");
+            dataTable.Columns.Add("Usuario");
+            dataTable.Columns.Add("Estado");
+
+            using (SqlConnection cn = new SqlConnection("Data Source=.;Initial Catalog=BD_PSI;Integrated Security=True"))
+            {
+                cn.Open();
+                SqlCommand cmd = new SqlCommand("SELECT Usuario.id, nombre, apellido, telefono, usuario, estado FROM Usuario INNER JOIN Credenciales_Acceso ON Usuario.id = Credenciales_Acceso.id_usuario", cn);
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    DataRow row = dataTable.NewRow();
+                    row["Id"] = reader.GetInt32(0).ToString();
+                    row["Nombre"] = reader.GetString(1);
+                    row["Apellido"] = reader.GetString(2);
+                    row["Teléfono"] = reader.GetString(3);
+                    row["Usuario"] = reader.GetString(4);
+                    row["Estado"] = reader.GetString(5);
+                    dataTable.Rows.Add(row);
+                }
+                cn.Close();
+            }
+            bindingSource.DataSource = dataTable;
+            gridUsers.DataSource = bindingSource;
+        }
 
 
         private void Login_Load(object sender, EventArgs e)
@@ -95,7 +130,7 @@ namespace Proyecto_Sistema_Inventario
 
         private void btnActualizar_Click(object sender, EventArgs e)
         {
-            Update_user form = new Update_user();
+            Update_user form = new Update_user(this);
             if (gridUsers.SelectedRows.Count > 0)
             {
                 DataGridViewRow selectedRow = gridUsers.SelectedRows[0];
@@ -104,7 +139,6 @@ namespace Proyecto_Sistema_Inventario
                 form.txtUApellido.Text = selectedRow.Cells[2].Value.ToString().Trim();              
                 form.txtUTelefono.Text = selectedRow.Cells[3].Value.ToString().Trim();
                 form.ShowDialog();
-                this.Close();
             }
             else
             {
