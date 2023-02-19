@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -12,39 +13,69 @@ namespace Proyecto_Sistema_Inventario
 {
     public partial class Stock_in : Form
     {
+        private BindingSource bindingSource;
         public Stock_in()
         {
             InitializeComponent();
             try
             {
+                // Crear el BindingSource y configurarlo como origen de datos del DataGridView
+                bindingSource = new BindingSource();
+                gridSelect.DataSource = bindingSource;
                 gridSelect.ReadOnly = true;
-                string filePath = "productos.csv";
-                var products = new List<Producto>();
+                gridSelect.AllowUserToOrderColumns = false;
+                gridSelect.AllowUserToResizeColumns = false;
+                gridSelect.AllowUserToResizeRows = false;
 
-                using (var reader = new StreamReader(filePath))
+                // Crear un DataTable y agregar las columnas correspondientes
+                DataTable dataTable = new DataTable();
+                dataTable.Columns.Add("Nombre");
+                dataTable.Columns.Add("Codigo");
+                dataTable.Columns.Add("Stock");
+                dataTable.Columns.Add("Costo");
+                dataTable.Columns.Add("Precio");
+
+
+                // Recuperar los datos de los productos de la base de datos y agregarlos al DataTable
+                using (SqlConnection cn = new SqlConnection("Data Source=.;Initial Catalog=BD_PSI;Integrated Security=True"))
                 {
-                    while (!reader.EndOfStream)
+                    cn.Open();
+                    SqlCommand cmd = new SqlCommand("SELECT codigo, nombre, stock, costo, precio FROM Producto", cn);
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read())
                     {
-                        var line = reader.ReadLine();
-                        var values = line.Split(',');
-
-                        var product = new Producto()
-                        {
-                            Nombre = values[0],
-                            Codigo = values[1],
-                            Stock = int.Parse(values[2]),
-                            Precio = double.Parse(values[3]),
-                            Costo = double.Parse(values[4])
-                        };
-                        products.Add(product);
+                        DataRow row = dataTable.NewRow();
+                        row["Codigo"] = reader.GetInt32(0).ToString();
+                        row["Nombre"] = reader.GetString(1);
+                        row["Stock"] = reader.GetInt32(2).ToString();
+                        row["Costo"] = reader.GetFloat(3).ToString();
+                        row["Precio"] = reader.GetFloat(4).ToString();
+                        dataTable.Rows.Add(row);
                     }
                 }
-                gridSelect.DataSource = products;
-                gridSelect.AutoGenerateColumns = true;
+                // Establecer el DataTable como origen de datos del BindingSource
+                bindingSource.DataSource = dataTable;
 
-            }catch(Exception ex)
+                // Formato Moneda para las columnas Costo y Precio
+                gridSelect.CellFormatting += (sender, e) =>
+                {
+                    if (e.ColumnIndex == gridSelect.Columns["Costo"].Index ||
+                        e.ColumnIndex == gridSelect.Columns["Precio"].Index)
+                    {
+                        if (e.Value != null && float.TryParse(e.Value.ToString(), out float value))
+                        {
+                            e.Value = value.ToString("C2");
+                        }
+                    }
+                };
+            }
+            catch (Exception ex)
             {
-                MessageBox.Show("ERROR!" + ex);
+                MessageBox.Show("Error!: " + ex.Message);
+            }
+            finally
+            {
+                ConexionBD.CerrarConexion();
             }
         }
 
@@ -52,45 +83,17 @@ namespace Proyecto_Sistema_Inventario
         {
             try
             {
-                var products = new List<Producto>();
-                using (var reader = new StreamReader("productos.csv"))
-                {
-                    while (!reader.EndOfStream)
-                    {
-                        var line = reader.ReadLine();
-                        var values = line.Split(',');
-                        var product = new Producto()
-                        {
-                            Nombre = values[0],
-                            Codigo = values[1],
-                            Stock = int.Parse(values[2]),
-                            Costo = double.Parse(values[3]),
-                            Precio = double.Parse(values[4])
-                        };
-                        products.Add(product);
-                    }
-                }
                 if (string.IsNullOrEmpty(txtFiltro.Text) || cmbFiltro.SelectedIndex == -1)
                 {
-                    gridSelect.DataSource = products;
+                    bindingSource.RemoveFilter();
                     return;
                 }
 
-                var filter = txtFiltro.Text.ToLower();
-                IEnumerable<Producto> filteredProducts;
-                switch (cmbFiltro.SelectedItem)
-                {
-                    case "Nombre":
-                        filteredProducts = products.Where(x => x.Nombre.ToLower().Contains(filter));
-                        break;
-                    case "Código":
-                        filteredProducts = products.Where(x => x.Codigo.ToLower().Contains(filter));
-                        break;
-                    default:
-                        filteredProducts = products;
-                        break;
-                }
-                gridSelect.DataSource = filteredProducts.ToList();
+                string filterColumn = cmbFiltro.SelectedItem.ToString();
+                string filterText = txtFiltro.Text;
+
+                // Filtrar los datos utilizando la propiedad Filter del BindingSource
+                bindingSource.Filter = $"{filterColumn} LIKE '%{filterText}%'";
             }
             catch (Exception ex)
             {
@@ -108,53 +111,48 @@ namespace Proyecto_Sistema_Inventario
         { 
             try
             {
-                string nombre_buscar;
                 string codigo_buscar;
                 if (gridSelect.SelectedRows.Count > 0)
                 {
                     DataGridViewRow selectedRow = gridSelect.SelectedRows[0];
-                    nombre_buscar = selectedRow.Cells[0].Value.ToString();
                     codigo_buscar = selectedRow.Cells[1].Value.ToString();
-                    string path = "productos.csv";
-                    string tempPath = "temp.csv";
-                    List<string[]> products = new List<string[]>();
-                    using (var reader = new StreamReader(path))
-                    {
-                        while (!reader.EndOfStream)
-                        {
-                            var line = reader.ReadLine();
-                            var values = line.Split(',');
-                            if (values[1] == codigo_buscar && values[0] == nombre_buscar)
-                            {
-                                int valor_actual = int.Parse(values[2]);
-                                int agregar= int.Parse(txtUStock.Text);
-                                int agregado = valor_actual + agregar;
 
-                                values[0] = values[0];
-                                values[1] = values[1];
-                                values[2] = agregado.ToString();
-                                values[3] = values[3];
-                                values[4] = values[4];
-                            }
-                            products.Add(values);
-                        }
-                    }
-                    using (var writer = new StreamWriter(tempPath))
+                    using (SqlConnection cn = new SqlConnection("Data Source=.;Initial Catalog=BD_PSI;Integrated Security=True"))
                     {
-                        foreach (string[] values in products)
+                        cn.Open();
+
+                        // Obtener el stock actual del producto
+                        SqlCommand cmdStockActual = new SqlCommand("SELECT stock FROM Producto WHERE codigo = @codigo", cn);
+                        cmdStockActual.Parameters.AddWithValue("@codigo", codigo_buscar);
+                        int stockActual = (int)cmdStockActual.ExecuteScalar();
+
+                        // Sumar la cantidad ingresada al stock actual
+                        int cantidadIngresada = int.Parse(txtUStock.Text);
+                        int nuevoStock = stockActual + cantidadIngresada;
+
+                        // Actualizar el stock en la base de datos
+                        SqlCommand cmdActualizarStock = new SqlCommand("UPDATE Producto SET stock = @stock WHERE codigo = @codigo", cn);
+                        cmdActualizarStock.Parameters.AddWithValue("@stock", nuevoStock);
+                        cmdActualizarStock.Parameters.AddWithValue("@codigo", codigo_buscar);
+                        int filasActualizadas = cmdActualizarStock.ExecuteNonQuery();
+
+                        if (filasActualizadas > 0)
                         {
-                            writer.WriteLine(string.Join(",", values));
+                            MessageBox.Show("Stock ingresado en producto!");
+                            txtUStock.Text = "";
+                            ActualizarTabla();
+                        }
+                        else
+                        {
+                            MessageBox.Show("No se encontró ningún producto con el código especificado!");
                         }
                     }
-                    File.Replace(tempPath, path, null);
-                    MessageBox.Show("Stock Ingresado en Producto!");
-                    txtUStock.Text = "";
                 }
                 else
                 {
                     MessageBox.Show("ERROR! Debe elegir un producto...");
                 }
-                
+
             }
             catch (Exception ex)
             {
@@ -162,13 +160,71 @@ namespace Proyecto_Sistema_Inventario
             }
             finally
             {
-
+                ConexionBD.CerrarConexion();
             }
+        }
+        public void ActualizarTabla()
+        {
+            DataTable dataTable = new DataTable();
+            dataTable.Columns.Add("Nombre");
+            dataTable.Columns.Add("Codigo");
+            dataTable.Columns.Add("Stock");
+            dataTable.Columns.Add("Costo");
+            dataTable.Columns.Add("Precio");
+
+            using (SqlConnection cn = new SqlConnection("Data Source=.;Initial Catalog=BD_PSI;Integrated Security=True"))
+            {
+                cn.Open();
+                SqlCommand cmd = new SqlCommand("SELECT codigo, nombre, stock, costo, precio FROM Producto", cn);
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    DataRow row = dataTable.NewRow();
+                    row["Codigo"] = reader.GetInt32(0).ToString();
+                    row["Nombre"] = reader.GetString(1);
+                    row["Stock"] = reader.GetInt32(2).ToString();
+                    row["Costo"] = reader.GetFloat(3).ToString();
+                    row["Precio"] = reader.GetFloat(4).ToString();
+                    dataTable.Rows.Add(row);
+                }
+                cn.Close();
+            }
+
+            bindingSource.DataSource = dataTable;
+            gridSelect.DataSource = bindingSource;
         }
 
         private void cmbFiltro_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void lblDA_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void gridSelect_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void btn_Cancelar_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void txtUStock_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtUStock_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.' || e.KeyChar != ','))
+            {
+                e.Handled = true;
+            }
         }
     }
 }

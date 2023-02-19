@@ -19,10 +19,13 @@ namespace Proyecto_Sistema_Inventario
             if(GlobalVaribales.isAdmin == false)
             {
                 usuario_menu.Visible = false;
+                actividades_menu.Visible = false;
+
             }
             else
             {
                 usuario_menu.Visible = true;
+                actividades_menu.Visible = true;
             }
             
         }
@@ -89,6 +92,12 @@ namespace Proyecto_Sistema_Inventario
         {
             Acerca_de acerca = new Acerca_de();
             acerca.ShowDialog();
+        }
+
+        private void consultaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Registro_de_Actividades registro = new Registro_de_Actividades();
+            registro.ShowDialog();
         }
     }
 }

@@ -16,8 +16,6 @@ namespace Proyecto_Sistema_Inventario
     {
         private BindingSource bindingSource;
         
-
-
         public Consult_products()
         {
 
@@ -91,7 +89,6 @@ namespace Proyecto_Sistema_Inventario
                 ConexionBD.CerrarConexion();
             }
         }
-        private Update_products UpdateProducts;
         public void ActualizarTabla()
         {
             DataTable dataTable = new DataTable();

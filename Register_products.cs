@@ -58,6 +58,31 @@ namespace Proyecto_Sistema_Inventario
                         if (rowsAffected > 0)
                         {
                             MessageBox.Show("Producto registrado exitosamente!");
+                            // Registra la actividad correspondiente
+                            Actividad actividad = new Actividad();
+                            actividad.Fechayhora = DateTime.Now;
+                            actividad.Ingreso_stock = int.Parse(txtStock.Text);
+                            actividad.Codigo_producto = int.Parse(txtCodigo.Text);
+                            actividad.Id_usuario = GlobalVaribales.id_usuario;
+
+                            query = "INSERT INTO Actividad (fechayhora, ingreso_stock, codigo_producto, id_usuario) VALUES (@fechayhora, @ingreso_stock, @codigo_producto, @id_usuario)";
+                            using (SqlCommand cmd2 = new SqlCommand(query, ConexionBD.cn))
+                            {
+                                cmd2.Parameters.AddWithValue("@fechayhora", actividad.Fechayhora);
+                                cmd2.Parameters.AddWithValue("@ingreso_stock", actividad.Ingreso_stock);
+                                cmd2.Parameters.AddWithValue("@codigo_producto", actividad.Codigo_producto);
+                                cmd2.Parameters.AddWithValue("@id_usuario", actividad.Id_usuario);
+
+                                rowsAffected = cmd2.ExecuteNonQuery();
+                                if (rowsAffected > 0)
+                                {
+                                    MessageBox.Show("Actividad registrada exitosamente!");
+                                }
+                                else
+                                {
+                                    MessageBox.Show("ERROR!: No se pudo registrar la actividad.");
+                                }
+                            }
                         }
                         else
                         {

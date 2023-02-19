@@ -37,6 +37,8 @@
             this.usuario_menu = new System.Windows.Forms.ToolStripMenuItem();
             this.registrarNuevoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.administrarUsuariosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.actividades_menu = new System.Windows.Forms.ToolStripMenuItem();
+            this.registro_actividades = new System.Windows.Forms.ToolStripMenuItem();
             this.ayudaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cerrarSesiónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.acercaDeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -50,6 +52,7 @@
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.inventarioToolStripMenuItem,
             this.usuario_menu,
+            this.actividades_menu,
             this.ayudaToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
@@ -112,6 +115,21 @@
             this.administrarUsuariosToolStripMenuItem.Text = "Administrar Usuarios";
             this.administrarUsuariosToolStripMenuItem.Click += new System.EventHandler(this.administrarUsuariosToolStripMenuItem_Click);
             // 
+            // actividades_menu
+            // 
+            this.actividades_menu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.registro_actividades});
+            this.actividades_menu.Name = "actividades_menu";
+            this.actividades_menu.Size = new System.Drawing.Size(80, 20);
+            this.actividades_menu.Text = "Actividades";
+            // 
+            // registro_actividades
+            // 
+            this.registro_actividades.Name = "registro_actividades";
+            this.registro_actividades.Size = new System.Drawing.Size(197, 22);
+            this.registro_actividades.Text = "Registro de Actividades";
+            this.registro_actividades.Click += new System.EventHandler(this.consultaToolStripMenuItem_Click);
+            // 
             // ayudaToolStripMenuItem
             // 
             this.ayudaToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -124,14 +142,14 @@
             // cerrarSesiónToolStripMenuItem
             // 
             this.cerrarSesiónToolStripMenuItem.Name = "cerrarSesiónToolStripMenuItem";
-            this.cerrarSesiónToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.cerrarSesiónToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
             this.cerrarSesiónToolStripMenuItem.Text = "Ver Ayuda";
             this.cerrarSesiónToolStripMenuItem.Click += new System.EventHandler(this.cerrarSesiónToolStripMenuItem_Click);
             // 
             // acercaDeToolStripMenuItem
             // 
             this.acercaDeToolStripMenuItem.Name = "acercaDeToolStripMenuItem";
-            this.acercaDeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.acercaDeToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
             this.acercaDeToolStripMenuItem.Text = "Acerca de";
             this.acercaDeToolStripMenuItem.Click += new System.EventHandler(this.acercaDeToolStripMenuItem_Click);
             // 
@@ -194,5 +212,7 @@
         private ToolStripMenuItem ayudaToolStripMenuItem;
         private ToolStripMenuItem cerrarSesiónToolStripMenuItem;
         private ToolStripMenuItem acercaDeToolStripMenuItem;
+        private ToolStripMenuItem actividades_menu;
+        private ToolStripMenuItem registro_actividades;
     }
 }

@@ -48,16 +48,17 @@ namespace Proyecto_Sistema_Inventario
             using (var connection = new SqlConnection("Data Source=.;Initial Catalog=BD_PSI;Integrated Security=True"))
             {
                 connection.Open();
-                var command = new SqlCommand($"SELECT nombre, apellido, password FROM Credenciales_Acceso INNER JOIN Usuario ON Usuario.id = Credenciales_Acceso.id_usuario WHERE usuario = '{username}' AND estado ='activo'", connection);
+                var command = new SqlCommand($"SELECT id, nombre, apellido, password FROM Credenciales_Acceso INNER JOIN Usuario ON Usuario.id = Credenciales_Acceso.id_usuario WHERE usuario = '{username}' AND estado ='activo'", connection);
 
                 var reader = command.ExecuteReader();
 
                 if (reader.Read())
                 {
                     string enteredPassword;
-                    string nombre = reader.GetString(0).Trim();
-                    string apellido = reader.GetString(1).Trim();
-                    var storedPassword = reader.GetString(2);
+                    GlobalVaribales.id_usuario = reader.GetInt32(0);
+                    string nombre = reader.GetString(1).Trim();
+                    string apellido = reader.GetString(2).Trim();
+                    var storedPassword = reader.GetString(3);
 
                     // Encriptar la contraseña ingresada por el usuario con SHA256
                     using (var sha256 = SHA256.Create())
@@ -71,6 +72,7 @@ namespace Proyecto_Sistema_Inventario
                     isvalid = enteredPassword == storedPassword;
                     MessageBox.Show("Acceso Exitoso! Bienvenido " + nombre);
                     GlobalVaribales.user = nombre+" "+apellido;
+                    MessageBox.Show("ID: "+GlobalVaribales.id_usuario);
                     return isvalid;
                 }
                 else

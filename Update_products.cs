@@ -125,22 +125,21 @@ namespace Proyecto_Sistema_Inventario
 
         private void txtUNombre_TextChanged(object sender, EventArgs e)
         {
-            GlobalVaribales.changed_nombre = true;
         }
 
         private void txtUStock_TextChanged(object sender, EventArgs e)
         {
-            GlobalVaribales.changed_stock = true;
+
         }
 
         private void txtUCosto_TextChanged(object sender, EventArgs e)
         {
-            GlobalVaribales.changed_costo = true;
+
         }
 
         private void txtUPVP_TextChanged(object sender, EventArgs e)
         {
-            GlobalVaribales.changed_precio = true;
+
         }
     }
 

@@ -10,10 +10,6 @@ namespace Proyecto_Sistema_Inventario
     {
         public static bool isAdmin = false;
         public static string user;
-        public static bool changed_nombre = false;
-        public static bool changed_stock =false;
-        public static bool changed_precio = false;
-        public static bool changed_costo = false;
-        public static bool changed_codigo = false;
+        public static int id_usuario=0;
     }
 }

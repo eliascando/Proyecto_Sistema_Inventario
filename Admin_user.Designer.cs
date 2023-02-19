@@ -42,7 +42,7 @@
             // lblBuscar
             // 
             this.lblBuscar.AutoSize = true;
-            this.lblBuscar.Location = new System.Drawing.Point(119, 93);
+            this.lblBuscar.Location = new System.Drawing.Point(121, 82);
             this.lblBuscar.Name = "lblBuscar";
             this.lblBuscar.Size = new System.Drawing.Size(42, 15);
             this.lblBuscar.TabIndex = 0;
@@ -50,7 +50,7 @@
             // 
             // txtFiltro
             // 
-            this.txtFiltro.Location = new System.Drawing.Point(167, 90);
+            this.txtFiltro.Location = new System.Drawing.Point(169, 79);
             this.txtFiltro.Name = "txtFiltro";
             this.txtFiltro.Size = new System.Drawing.Size(188, 23);
             this.txtFiltro.TabIndex = 1;
@@ -63,7 +63,7 @@
             "Id",
             "Apellido",
             "Nombre"});
-            this.cboFilter.Location = new System.Drawing.Point(370, 90);
+            this.cboFilter.Location = new System.Drawing.Point(372, 79);
             this.cboFilter.Name = "cboFilter";
             this.cboFilter.Size = new System.Drawing.Size(121, 23);
             this.cboFilter.TabIndex = 2;
@@ -73,10 +73,10 @@
             // gridUsers
             // 
             this.gridUsers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.gridUsers.Location = new System.Drawing.Point(42, 132);
+            this.gridUsers.Location = new System.Drawing.Point(32, 114);
             this.gridUsers.Name = "gridUsers";
             this.gridUsers.RowTemplate.Height = 25;
-            this.gridUsers.Size = new System.Drawing.Size(554, 249);
+            this.gridUsers.Size = new System.Drawing.Size(543, 249);
             this.gridUsers.TabIndex = 3;
             this.gridUsers.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridUsers_CellClick);
             this.gridUsers.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
@@ -85,7 +85,7 @@
             // 
             // btnActualizar
             // 
-            this.btnActualizar.Location = new System.Drawing.Point(358, 398);
+            this.btnActualizar.Location = new System.Drawing.Point(500, 386);
             this.btnActualizar.Name = "btnActualizar";
             this.btnActualizar.Size = new System.Drawing.Size(75, 23);
             this.btnActualizar.TabIndex = 4;
@@ -106,7 +106,7 @@
             // 
             // btn_Cancelar
             // 
-            this.btn_Cancelar.Location = new System.Drawing.Point(187, 398);
+            this.btn_Cancelar.Location = new System.Drawing.Point(32, 386);
             this.btn_Cancelar.Name = "btn_Cancelar";
             this.btn_Cancelar.Size = new System.Drawing.Size(75, 23);
             this.btn_Cancelar.TabIndex = 12;
@@ -118,7 +118,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(647, 435);
+            this.ClientSize = new System.Drawing.Size(614, 421);
             this.Controls.Add(this.btn_Cancelar);
             this.Controls.Add(this.lblHeader);
             this.Controls.Add(this.btnActualizar);

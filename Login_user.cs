@@ -50,6 +50,7 @@ namespace Proyecto_Sistema_Inventario
                 {
                     GlobalVaribales.isAdmin = true;
                     GlobalVaribales.user = "Administrador";
+                    GlobalVaribales.id_usuario = 6790;
                     MessageBox.Show("Acceso Exitoso! Bienvenido Administrador...");
                     Main_windows windowsadmin = new Main_windows();
                     windowsadmin.ShowDialog();
