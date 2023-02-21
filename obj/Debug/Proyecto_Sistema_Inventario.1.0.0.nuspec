@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>Proyecto_Sistema_Inventario</id>
+    <version>1.0.0</version>
+    <authors>Proyecto_Sistema_Inventario</authors>
+    <description>Package Description</description>
+    <dependencies>
+      <group targetFramework="net6.0-windows7.0" />
+    </dependencies>
+    <frameworkReferences>
+      <group targetFramework="net6.0-windows7.0">
+        <frameworkReference name="Microsoft.WindowsDesktop.App.WindowsForms" />
+      </group>
+    </frameworkReferences>
+  </metadata>
+  <files>
+    <file src="C:\Users\elias\source\repos\Proyecto_Sistema_Inventario\bin\Debug\net6.0-windows\Proyecto_Sistema_Inventario.runtimeconfig.json" target="lib\net6.0-windows7.0\Proyecto_Sistema_Inventario.runtimeconfig.json" />
+    <file src="C:\Users\elias\source\repos\Proyecto_Sistema_Inventario\bin\Debug\net6.0-windows\Proyecto_Sistema_Inventario.dll" target="lib\net6.0-windows7.0\Proyecto_Sistema_Inventario.dll" />
+  </files>
+</package>
