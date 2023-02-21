@@ -48,7 +48,6 @@ namespace Modelo
             {
                 ConexionBD.CerrarConexion();
             }
-
         }
         public void GuardarUsuario(Usuario usuario)
         {
@@ -108,7 +107,6 @@ namespace Modelo
             {
                 ConexionBD.CerrarConexion();
             }
-
         }
         public void GuardarActividad(int id_usuario,string tipo_actividad,Producto producto)
         {
@@ -136,7 +134,7 @@ namespace Modelo
                         int rowsAffected = cmd.ExecuteNonQuery();
                         if (rowsAffected <= 0)
                         {
-                            MessageBox.Show("ERROR!: No se pudo registrar la actividad.");
+                            MessageBox.Show("ERROR!: No se pudo registrar la actividad...");
                         }
                     }
                 }
@@ -182,7 +180,7 @@ namespace Modelo
                 }
                 else
                 {
-                    MessageBox.Show("ERROR!: Conexion a la base de datos!");
+                    MessageBox.Show("ERROR!: Conexion a la base de datos...");
                 }
             }
             catch (Exception ex)
@@ -225,7 +223,7 @@ namespace Modelo
                 }
                 else
                 {
-                    MessageBox.Show("ERROR!: Conexion a la base de datos!");
+                    MessageBox.Show("ERROR!: Conexion a la base de datos...");
                 }
             }
             catch(Exception ex)
@@ -272,7 +270,7 @@ namespace Modelo
                 }
                 else
                 {
-                    MessageBox.Show("ERROR!: Conexion a la base de datos!");
+                    MessageBox.Show("ERROR!: Conexion a la base de datos...");
                 }
             }catch(Exception ex)
             {
@@ -310,7 +308,7 @@ namespace Modelo
                 }
                 else
                 {
-                    MessageBox.Show("ERROR!: Conexion a la base de datos!");
+                    MessageBox.Show("ERROR!: Conexion a la base de datos...");
                 }
 
             }
@@ -322,7 +320,6 @@ namespace Modelo
             {
                 ConexionBD.CerrarConexion();
             }
-
         }
         public void ActualizarUsuario(Usuario usuario)
         {
@@ -346,7 +343,7 @@ namespace Modelo
                 }
                 else
                 {
-                    MessageBox.Show("ERROR!: Conexion a la base de datos!");
+                    MessageBox.Show("ERROR!: Conexion a la base de datos...");
                 }
 
             }
@@ -358,7 +355,6 @@ namespace Modelo
             {
                 ConexionBD.CerrarConexion();
             }
-
         }
         public void IngresoProducto(Producto producto, int ingreso)
         {
@@ -390,7 +386,7 @@ namespace Modelo
                 }
                 else
                 {
-                    MessageBox.Show("ERROR!: Conexion a la base de datos!");
+                    MessageBox.Show("ERROR!: Conexion a la base de datos...");
                 }
             }
             catch (Exception ex)
@@ -424,7 +420,7 @@ namespace Modelo
                 }
                 else
                 {
-                    MessageBox.Show("ERROR!: Conexion a la base de datos!");
+                    MessageBox.Show("ERROR!: Conexion a la base de datos...");
                 }
             }
             catch(Exception ex)
@@ -435,7 +431,6 @@ namespace Modelo
             {
                 ConexionBD.CerrarConexion();
             }
-
         }
         public bool IsValidUser(string username, string password)
         {
@@ -488,7 +483,7 @@ namespace Modelo
                     }
                     else
                     {
-                        MessageBox.Show("ERROR!: Conexion a la base de datos!");
+                        MessageBox.Show("ERROR!: Conexion a la base de datos...");
                         isvalid = false;
                     }
                 }                    
@@ -502,7 +497,6 @@ namespace Modelo
                 ConexionBD.CerrarConexion();
             }
             return isvalid;
-
         }
     }
 

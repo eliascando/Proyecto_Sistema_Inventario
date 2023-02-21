@@ -16,7 +16,7 @@ namespace Controlador
         {
             if (string.IsNullOrEmpty(nombre)||string.IsNullOrEmpty(codigo)||string.IsNullOrEmpty(stock)||string.IsNullOrEmpty(precio)||string.IsNullOrEmpty(costo))
             {
-                MessageBox.Show("ERROR!: Debe Ingresar Todos Los Campos");
+                MessageBox.Show("ERROR!: Debe Ingresar Todos Los Campos...");
                 return;
             }
             else
@@ -64,7 +64,7 @@ namespace Controlador
             
             if (string.IsNullOrEmpty(stock_in))
             {
-                MessageBox.Show("ERROR!: Debe Ingresar Stock");
+                MessageBox.Show("ERROR!: Debe Ingresar Stock...");
                 return;
             }
             else

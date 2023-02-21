@@ -14,7 +14,7 @@ namespace Controlador
         {
             if (string.IsNullOrEmpty(id) || string.IsNullOrEmpty(nombre) || string.IsNullOrEmpty(apellido) || string.IsNullOrEmpty(telefono) || string.IsNullOrEmpty(usuario) || string.IsNullOrEmpty(password))
             {
-                MessageBox.Show("ERROR!: Debe Ingresar Todos Los Campos");
+                MessageBox.Show("ERROR!: Debe Ingresar Todos Los Campos...");
                 return;
             }
             else
@@ -53,7 +53,7 @@ namespace Controlador
             CRUD login=new CRUD();
             if(string.IsNullOrEmpty(username)||string.IsNullOrEmpty(password))
             {
-                MessageBox.Show("ERROR!: Debe Ingresar Usuario y Contraseña!");
+                MessageBox.Show("ERROR!: Debe Ingresar Usuario y Contraseña...");
                 return false;
             }
             else
@@ -64,7 +64,7 @@ namespace Controlador
                 }
                 else
                 {
-                    MessageBox.Show("ERROR!: Usuario o Contraseña Incorrectos!");
+                    MessageBox.Show("ERROR!: Usuario o Contraseña Incorrectos...");
                     return false;
                 }
             }
