@@ -49,7 +49,6 @@ namespace Vista
                 DataGridViewRow selectedRow = gridSelect.SelectedRows[0];                
                 control.AgregarStock(txtUStock.Text,selectedRow.Cells[0].Value.ToString().Trim(), selectedRow.Cells[1].Value.ToString().Trim(), selectedRow.Cells[2].Value.ToString().Trim(), selectedRow.Cells[3].Value.ToString().Trim(), selectedRow.Cells[4].Value.ToString().Trim());
                 CargarTabla();
-                LimpiarControles(this);
             }
             else
             {
