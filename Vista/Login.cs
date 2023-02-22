@@ -27,6 +27,7 @@ namespace Vista
             {
                 Main_window main= new Main_window(this);
                 main.Show();
+                checkVerPass.Checked = false;
                 this.Hide();
             }
             txtUser.Text = "";
