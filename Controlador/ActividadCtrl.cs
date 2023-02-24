@@ -14,5 +14,10 @@ namespace Controlador
             Modelo.CRUD datos = new Modelo.CRUD();
             return datos.DatosActividad();
         }
+        public DataTable DatosInicioSesion()
+        {
+            Modelo.CRUD datos = new Modelo.CRUD();
+            return datos.DatosInicioSesion();
+        }
     }
 }

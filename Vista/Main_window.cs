@@ -20,8 +20,8 @@ namespace Vista
             InitializeComponent();
             lblUser.Text = Modelo.GlobalVariables.user;
             this.FormClosing += Main_windows_FormClosing;
-            this.loginForm= loginForm;
-            if(GlobalVariables.isAdmin == false)
+            this.loginForm = loginForm;
+            if (GlobalVariables.isAdmin == false)
             {
                 actividades_menu.Visible = false;
                 usuario_menu.Visible = false;
@@ -42,13 +42,13 @@ namespace Vista
 
         private void ingresarProductoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Stock_in stock= new Stock_in();
+            Stock_in stock = new Stock_in();
             stock.ShowDialog();
         }
 
         private void registrarNuevoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Create_user crear= new Create_user();
+            Create_user crear = new Create_user();
             crear.ShowDialog();
         }
 
@@ -76,13 +76,13 @@ namespace Vista
             if (result == DialogResult.OK)
             {
                 this.Dispose();
-                loginForm.Show();             
+                loginForm.Show();
             }
         }
 
         private void registro_actividades_Click(object sender, EventArgs e)
         {
-            Activity_log activity_Log= new Activity_log();
+            Activity_log activity_Log = new Activity_log();
             activity_Log.ShowDialog();
         }
 
@@ -90,6 +90,12 @@ namespace Vista
         {
             Acerca_de acerca = new Acerca_de();
             acerca.ShowDialog();
+        }
+
+        private void registroDeInicioDeSesionToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Login_log inicio = new Login_log();
+            inicio.ShowDialog();
         }
     }
 }

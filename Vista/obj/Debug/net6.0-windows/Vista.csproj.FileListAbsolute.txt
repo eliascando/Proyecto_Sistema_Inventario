@@ -88,3 +88,4 @@ C:\Users\elias\source\repos\Proyecto_Sistema_Inventario\Vista\obj\Debug\net6.0-w
 C:\Users\elias\source\repos\Proyecto_Sistema_Inventario\Vista\obj\Debug\net6.0-windows\Vista.pdb
 C:\Users\elias\source\repos\Proyecto_Sistema_Inventario\Vista\obj\Debug\net6.0-windows\Vista.genruntimeconfig.cache
 C:\Users\elias\source\repos\Proyecto_Sistema_Inventario\Vista\obj\Debug\net6.0-windows\ref\Vista.dll
+C:\Users\elias\source\repos\Proyecto_Sistema_Inventario\Vista\obj\Debug\net6.0-windows\Vista.Login_log.resources

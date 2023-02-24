@@ -29,162 +29,158 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main_window));
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.inventarioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.registrarProductoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.ingresarProductoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.consultarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.usuario_menu = new System.Windows.Forms.ToolStripMenuItem();
-            this.registrarNuevoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.administrarUsuariosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.actividades_menu = new System.Windows.Forms.ToolStripMenuItem();
-            this.registro_actividades = new System.Windows.Forms.ToolStripMenuItem();
-            this.ayudaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.acercaDeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.btnCerrarSesion = new System.Windows.Forms.Button();
-            this.lblUser = new System.Windows.Forms.Label();
-            this.menuStrip1.SuspendLayout();
-            this.SuspendLayout();
+            menuStrip1 = new MenuStrip();
+            inventarioToolStripMenuItem = new ToolStripMenuItem();
+            registrarProductoToolStripMenuItem = new ToolStripMenuItem();
+            ingresarProductoToolStripMenuItem = new ToolStripMenuItem();
+            consultarToolStripMenuItem = new ToolStripMenuItem();
+            usuario_menu = new ToolStripMenuItem();
+            registrarNuevoToolStripMenuItem = new ToolStripMenuItem();
+            administrarUsuariosToolStripMenuItem = new ToolStripMenuItem();
+            actividades_menu = new ToolStripMenuItem();
+            registro_actividades = new ToolStripMenuItem();
+            ayudaToolStripMenuItem = new ToolStripMenuItem();
+            acercaDeToolStripMenuItem = new ToolStripMenuItem();
+            btnCerrarSesion = new Button();
+            lblUser = new Label();
+            registroDeInicioDeSesionToolStripMenuItem = new ToolStripMenuItem();
+            menuStrip1.SuspendLayout();
+            SuspendLayout();
             // 
             // menuStrip1
             // 
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.inventarioToolStripMenuItem,
-            this.usuario_menu,
-            this.actividades_menu,
-            this.ayudaToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(793, 24);
-            this.menuStrip1.TabIndex = 1;
-            this.menuStrip1.Text = "menuStrip1";
+            menuStrip1.Items.AddRange(new ToolStripItem[] { inventarioToolStripMenuItem, usuario_menu, actividades_menu, ayudaToolStripMenuItem });
+            menuStrip1.Location = new Point(0, 0);
+            menuStrip1.Name = "menuStrip1";
+            menuStrip1.Size = new Size(793, 24);
+            menuStrip1.TabIndex = 1;
+            menuStrip1.Text = "menuStrip1";
             // 
             // inventarioToolStripMenuItem
             // 
-            this.inventarioToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.registrarProductoToolStripMenuItem,
-            this.ingresarProductoToolStripMenuItem,
-            this.consultarToolStripMenuItem});
-            this.inventarioToolStripMenuItem.Name = "inventarioToolStripMenuItem";
-            this.inventarioToolStripMenuItem.Size = new System.Drawing.Size(72, 20);
-            this.inventarioToolStripMenuItem.Text = "Inventario";
+            inventarioToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { registrarProductoToolStripMenuItem, ingresarProductoToolStripMenuItem, consultarToolStripMenuItem });
+            inventarioToolStripMenuItem.Name = "inventarioToolStripMenuItem";
+            inventarioToolStripMenuItem.Size = new Size(72, 20);
+            inventarioToolStripMenuItem.Text = "Inventario";
             // 
             // registrarProductoToolStripMenuItem
             // 
-            this.registrarProductoToolStripMenuItem.Name = "registrarProductoToolStripMenuItem";
-            this.registrarProductoToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
-            this.registrarProductoToolStripMenuItem.Text = "Registrar Producto";
-            this.registrarProductoToolStripMenuItem.Click += new System.EventHandler(this.registrarProductoToolStripMenuItem_Click);
+            registrarProductoToolStripMenuItem.Name = "registrarProductoToolStripMenuItem";
+            registrarProductoToolStripMenuItem.Size = new Size(172, 22);
+            registrarProductoToolStripMenuItem.Text = "Registrar Producto";
+            registrarProductoToolStripMenuItem.Click += registrarProductoToolStripMenuItem_Click;
             // 
             // ingresarProductoToolStripMenuItem
             // 
-            this.ingresarProductoToolStripMenuItem.Name = "ingresarProductoToolStripMenuItem";
-            this.ingresarProductoToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
-            this.ingresarProductoToolStripMenuItem.Text = "Ingresar Producto";
-            this.ingresarProductoToolStripMenuItem.Click += new System.EventHandler(this.ingresarProductoToolStripMenuItem_Click);
+            ingresarProductoToolStripMenuItem.Name = "ingresarProductoToolStripMenuItem";
+            ingresarProductoToolStripMenuItem.Size = new Size(172, 22);
+            ingresarProductoToolStripMenuItem.Text = "Ingresar Producto";
+            ingresarProductoToolStripMenuItem.Click += ingresarProductoToolStripMenuItem_Click;
             // 
             // consultarToolStripMenuItem
             // 
-            this.consultarToolStripMenuItem.Name = "consultarToolStripMenuItem";
-            this.consultarToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
-            this.consultarToolStripMenuItem.Text = "Consultar";
-            this.consultarToolStripMenuItem.Click += new System.EventHandler(this.consultarToolStripMenuItem_Click);
+            consultarToolStripMenuItem.Name = "consultarToolStripMenuItem";
+            consultarToolStripMenuItem.Size = new Size(172, 22);
+            consultarToolStripMenuItem.Text = "Consultar";
+            consultarToolStripMenuItem.Click += consultarToolStripMenuItem_Click;
             // 
             // usuario_menu
             // 
-            this.usuario_menu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.registrarNuevoToolStripMenuItem,
-            this.administrarUsuariosToolStripMenuItem});
-            this.usuario_menu.Name = "usuario_menu";
-            this.usuario_menu.Size = new System.Drawing.Size(64, 20);
-            this.usuario_menu.Text = "Usuarios";
+            usuario_menu.DropDownItems.AddRange(new ToolStripItem[] { registrarNuevoToolStripMenuItem, administrarUsuariosToolStripMenuItem });
+            usuario_menu.Name = "usuario_menu";
+            usuario_menu.Size = new Size(64, 20);
+            usuario_menu.Text = "Usuarios";
             // 
             // registrarNuevoToolStripMenuItem
             // 
-            this.registrarNuevoToolStripMenuItem.Name = "registrarNuevoToolStripMenuItem";
-            this.registrarNuevoToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
-            this.registrarNuevoToolStripMenuItem.Text = "Registrar Nuevo";
-            this.registrarNuevoToolStripMenuItem.Click += new System.EventHandler(this.registrarNuevoToolStripMenuItem_Click);
+            registrarNuevoToolStripMenuItem.Name = "registrarNuevoToolStripMenuItem";
+            registrarNuevoToolStripMenuItem.Size = new Size(184, 22);
+            registrarNuevoToolStripMenuItem.Text = "Registrar Nuevo";
+            registrarNuevoToolStripMenuItem.Click += registrarNuevoToolStripMenuItem_Click;
             // 
             // administrarUsuariosToolStripMenuItem
             // 
-            this.administrarUsuariosToolStripMenuItem.Name = "administrarUsuariosToolStripMenuItem";
-            this.administrarUsuariosToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
-            this.administrarUsuariosToolStripMenuItem.Text = "Administrar Usuarios";
-            this.administrarUsuariosToolStripMenuItem.Click += new System.EventHandler(this.administrarUsuariosToolStripMenuItem_Click);
+            administrarUsuariosToolStripMenuItem.Name = "administrarUsuariosToolStripMenuItem";
+            administrarUsuariosToolStripMenuItem.Size = new Size(184, 22);
+            administrarUsuariosToolStripMenuItem.Text = "Administrar Usuarios";
+            administrarUsuariosToolStripMenuItem.Click += administrarUsuariosToolStripMenuItem_Click;
             // 
             // actividades_menu
             // 
-            this.actividades_menu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.registro_actividades});
-            this.actividades_menu.Name = "actividades_menu";
-            this.actividades_menu.Size = new System.Drawing.Size(80, 20);
-            this.actividades_menu.Text = "Actividades";
+            actividades_menu.DropDownItems.AddRange(new ToolStripItem[] { registro_actividades, registroDeInicioDeSesionToolStripMenuItem });
+            actividades_menu.Name = "actividades_menu";
+            actividades_menu.Size = new Size(80, 20);
+            actividades_menu.Text = "Actividades";
             // 
             // registro_actividades
             // 
-            this.registro_actividades.Name = "registro_actividades";
-            this.registro_actividades.Size = new System.Drawing.Size(197, 22);
-            this.registro_actividades.Text = "Registro de Actividades";
-            this.registro_actividades.Click += new System.EventHandler(this.registro_actividades_Click);
+            registro_actividades.Name = "registro_actividades";
+            registro_actividades.Size = new Size(218, 22);
+            registro_actividades.Text = "Registro de Actividades";
+            registro_actividades.Click += registro_actividades_Click;
             // 
             // ayudaToolStripMenuItem
             // 
-            this.ayudaToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.acercaDeToolStripMenuItem});
-            this.ayudaToolStripMenuItem.Name = "ayudaToolStripMenuItem";
-            this.ayudaToolStripMenuItem.Size = new System.Drawing.Size(53, 20);
-            this.ayudaToolStripMenuItem.Text = "Ayuda";
+            ayudaToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { acercaDeToolStripMenuItem });
+            ayudaToolStripMenuItem.Name = "ayudaToolStripMenuItem";
+            ayudaToolStripMenuItem.Size = new Size(53, 20);
+            ayudaToolStripMenuItem.Text = "Ayuda";
             // 
             // acercaDeToolStripMenuItem
             // 
-            this.acercaDeToolStripMenuItem.Name = "acercaDeToolStripMenuItem";
-            this.acercaDeToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
-            this.acercaDeToolStripMenuItem.Text = "Acerca de";
-            this.acercaDeToolStripMenuItem.Click += new System.EventHandler(this.acercaDeToolStripMenuItem_Click);
+            acercaDeToolStripMenuItem.Name = "acercaDeToolStripMenuItem";
+            acercaDeToolStripMenuItem.Size = new Size(126, 22);
+            acercaDeToolStripMenuItem.Text = "Acerca de";
+            acercaDeToolStripMenuItem.Click += acercaDeToolStripMenuItem_Click;
             // 
             // btnCerrarSesion
             // 
-            this.btnCerrarSesion.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btnCerrarSesion.Location = new System.Drawing.Point(645, 402);
-            this.btnCerrarSesion.Name = "btnCerrarSesion";
-            this.btnCerrarSesion.Size = new System.Drawing.Size(136, 36);
-            this.btnCerrarSesion.TabIndex = 4;
-            this.btnCerrarSesion.Text = "Cerrar Sesión";
-            this.btnCerrarSesion.UseVisualStyleBackColor = true;
-            this.btnCerrarSesion.Click += new System.EventHandler(this.btnCerrarSesion_Click);
+            btnCerrarSesion.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            btnCerrarSesion.Location = new Point(645, 402);
+            btnCerrarSesion.Name = "btnCerrarSesion";
+            btnCerrarSesion.Size = new Size(136, 36);
+            btnCerrarSesion.TabIndex = 4;
+            btnCerrarSesion.Text = "Cerrar Sesión";
+            btnCerrarSesion.UseVisualStyleBackColor = true;
+            btnCerrarSesion.Click += btnCerrarSesion_Click;
             // 
             // lblUser
             // 
-            this.lblUser.AutoSize = true;
-            this.lblUser.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblUser.Location = new System.Drawing.Point(12, 411);
-            this.lblUser.Name = "lblUser";
-            this.lblUser.Size = new System.Drawing.Size(86, 30);
-            this.lblUser.TabIndex = 3;
-            this.lblUser.Text = "usuario";
+            lblUser.AutoSize = true;
+            lblUser.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point);
+            lblUser.Location = new Point(12, 411);
+            lblUser.Name = "lblUser";
+            lblUser.Size = new Size(86, 30);
+            lblUser.TabIndex = 3;
+            lblUser.Text = "usuario";
+            // 
+            // registroDeInicioDeSesionToolStripMenuItem
+            // 
+            registroDeInicioDeSesionToolStripMenuItem.Name = "registroDeInicioDeSesionToolStripMenuItem";
+            registroDeInicioDeSesionToolStripMenuItem.Size = new Size(218, 22);
+            registroDeInicioDeSesionToolStripMenuItem.Text = "Registro de Inicio de Sesion";
+            registroDeInicioDeSesionToolStripMenuItem.Click += registroDeInicioDeSesionToolStripMenuItem_Click;
             // 
             // Main_window
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
-            this.ClientSize = new System.Drawing.Size(793, 450);
-            this.Controls.Add(this.btnCerrarSesion);
-            this.Controls.Add(this.lblUser);
-            this.Controls.Add(this.menuStrip1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MaximizeBox = false;
-            this.Name = "Main_window";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Minimarket JipiJapa";
-            this.Load += new System.EventHandler(this.Main_window_Load);
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
+            ClientSize = new Size(793, 450);
+            Controls.Add(btnCerrarSesion);
+            Controls.Add(lblUser);
+            Controls.Add(menuStrip1);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            Icon = (Icon)resources.GetObject("$this.Icon");
+            MaximizeBox = false;
+            Name = "Main_window";
+            StartPosition = FormStartPosition.CenterScreen;
+            Text = "Minimarket JipiJapa";
+            Load += Main_window_Load;
+            menuStrip1.ResumeLayout(false);
+            menuStrip1.PerformLayout();
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -203,5 +199,6 @@
         private ToolStripMenuItem acercaDeToolStripMenuItem;
         private Button btnCerrarSesion;
         private Label lblUser;
+        private ToolStripMenuItem registroDeInicioDeSesionToolStripMenuItem;
     }
 }

@@ -8,6 +8,7 @@ using System.Security.Cryptography;
 using System.Data;
 using System.Windows.Forms;
 using System.Collections;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace Modelo
 {
@@ -278,6 +279,49 @@ namespace Modelo
             }
             return dt;
         }
+
+        public DataTable DatosInicioSesion()
+        {
+            DataTable dt = new DataTable();
+            try
+            {
+                if (ConexionBD.AbrirConexion())
+                {
+                    dt.Columns.Add("Fecha y Hora");
+                    dt.Columns.Add("Id");
+                    dt.Columns.Add("Nombre");
+                    dt.Columns.Add("Apellido");
+                    dt.Columns.Add("Estado");
+                  
+                    SqlCommand cmd = new SqlCommand("ObtenerInicioSesion", ConexionBD.cn);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        DataRow row = dt.NewRow();
+                        row["Fecha y Hora"] = reader.GetDateTime(0);
+                        row["Id"] = reader.GetInt32(1);
+                        row["Nombre"] = reader.GetString(2);
+                        row["Apellido"] = reader.GetString(3);
+                        row["Estado"] = reader.GetString(4);
+                        dt.Rows.Add(row);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("ERROR!: Conexion a la base de datos...");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("ERROR!: " + ex);
+            }
+            finally
+            {
+                ConexionBD.CerrarConexion();
+            }
+            return dt;
+        }
         public void ActualizarProducto(Producto producto)
         {
             try
@@ -485,8 +529,13 @@ namespace Modelo
                             {
                                 GlobalVariables.user = nombre + " " + apellido;
                                 GlobalVariables.isAdmin = false;
+                                GuardarInicioSesion("Acceso Exitoso", reader.GetInt32(0));
                                 MessageBox.Show("Acceso Exitoso! Bienvenido " + nombre);
                                 isvalid = true;
+                            }
+                            else 
+                            {
+                                GuardarInicioSesion("Acceso Fallido", reader.GetInt32(0));
                             }                           
                         }
                     }
@@ -506,6 +555,34 @@ namespace Modelo
                 ConexionBD.CerrarConexion();
             }
             return isvalid;
+        }
+
+        public void GuardarInicioSesion(string estado_inicio, int id_user)
+        {
+            try
+            {
+                if (ConexionBD.AbrirConexion())
+                {
+                    var cmd = new SqlCommand("GuardarInicioSesion", ConexionBD.cn);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@fechayhora", DateTime.Now);
+                    cmd.Parameters.AddWithValue("@id_usuario", id_user);
+                    cmd.Parameters.AddWithValue("@estado_login",estado_inicio);
+                    cmd.ExecuteNonQuery();
+
+                }
+                else
+                {
+                    MessageBox.Show("ERROR!: Conexion a la base de datos...");
+                }
+            }catch(Exception ex)
+            {
+                MessageBox.Show("Error!: " + ex);
+            }
+            finally
+            {
+                ConexionBD.CerrarConexion();
+            }
         }
     }
 }
