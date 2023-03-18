@@ -288,7 +288,7 @@ namespace Modelo
                 if (ConexionBD.AbrirConexion())
                 {
                     dt.Columns.Add("Fecha y Hora");
-                    dt.Columns.Add("Id");
+                    dt.Columns.Add("Usuario");
                     dt.Columns.Add("Nombre");
                     dt.Columns.Add("Apellido");
                     dt.Columns.Add("Estado");
@@ -300,7 +300,7 @@ namespace Modelo
                     {
                         DataRow row = dt.NewRow();
                         row["Fecha y Hora"] = reader.GetDateTime(0);
-                        row["Id"] = reader.GetInt32(1);
+                        row["Usuario"] = reader.GetString(1);
                         row["Nombre"] = reader.GetString(2);
                         row["Apellido"] = reader.GetString(3);
                         row["Estado"] = reader.GetString(4);
@@ -568,8 +568,7 @@ namespace Modelo
                     cmd.Parameters.AddWithValue("@fechayhora", DateTime.Now);
                     cmd.Parameters.AddWithValue("@id_usuario", id_user);
                     cmd.Parameters.AddWithValue("@estado_login",estado_inicio);
-                    cmd.ExecuteNonQuery();
-
+                    int rowsAffected = cmd.ExecuteNonQuery();
                 }
                 else
                 {

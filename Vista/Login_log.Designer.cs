@@ -80,12 +80,12 @@
             // cboFilter
             // 
             cboFilter.FormattingEnabled = true;
-            cboFilter.Items.AddRange(new object[] { "Id", "Nombre", "Apellido" });
+            cboFilter.Items.AddRange(new object[] { "Usuario", "Nombre", "Apellido" });
             cboFilter.Location = new Point(104, 79);
             cboFilter.Name = "cboFilter";
             cboFilter.Size = new Size(121, 23);
             cboFilter.TabIndex = 28;
-            cboFilter.Text = "Id";
+            cboFilter.Text = "Usuario";
             // 
             // txtFiltro
             // 
